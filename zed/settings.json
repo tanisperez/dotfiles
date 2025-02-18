@@ -53,5 +53,9 @@
   "toolbar": {
     "breadcrumbs": false,
     "quick_actions": false
+  },
+  "project_panel": {
+    "default_width": 240,
+    "indent_size": 24
   }
 }

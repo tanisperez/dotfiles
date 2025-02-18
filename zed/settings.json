@@ -31,6 +31,7 @@
     "button": false
   },
   "assistant": {
+    "enabled": false,
     "button": false,
     "version": "2"
   },

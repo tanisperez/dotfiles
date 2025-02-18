@@ -49,5 +49,9 @@
     "show": true,
     "show_nav_history_buttons": false,
     "show_tab_bar_buttons": true
+  },
+  "toolbar": {
+    "breadcrumbs": false,
+    "quick_actions": false
   }
 }

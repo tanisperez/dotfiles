@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+# ssh
+rm -f ~/.ssh/config
+ln -s ~/dotfiles/ssh/config ~/.ssh/config
+
 # zed
 rm -f ~/.config/zed/settings.json
 ln -s ~/dotfiles/zed/settings.json ~/.config/zed/settings.json

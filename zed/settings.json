@@ -7,56 +7,63 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
-  "telemetry": {
-    "metrics": false,
-    "diagnostics": false
-  },
-  "ui_font_size": 16,
-  "buffer_font_size": 16,
-  "theme": {
-    "mode": "system",
-    "light": "One Dark",
-    "dark": "Github Dark Dimmed"
-  },
-  "features": {
-    "copilot": false
-  },
-  "collaboration_panel": {
-    "button": false
-  },
-  "chat_panel": {
-    "button": "never"
-  },
-  "notification_panel": {
-    "button": false
-  },
-  "assistant": {
-    "enabled": false,
-    "button": false,
-    "version": "2"
-  },
-  "preview_tabs": {
-    "enabled": false
-  },
-  "restore_on_startup": "none",
-  "soft_wrap": "editor_width",
-  "git": {
-    "inline_blame": {
-      "enabled": false
+    "telemetry": {
+        "metrics": false,
+        "diagnostics": false
+    },
+    "ui_font_size": 16,
+    "buffer_font_size": 16,
+    "theme": {
+        "mode": "system",
+        "light": "One Dark",
+        "dark": "Github Dark Dimmed"
+    },
+    "features": {
+        "copilot": false
+    },
+    "collaboration_panel": {
+        "button": false
+    },
+    "chat_panel": {
+        "button": "never"
+    },
+    "notification_panel": {
+        "button": false
+    },
+    "assistant": {
+        "enabled": false,
+        "button": false,
+        "version": "2"
+    },
+    "preview_tabs": {
+        "enabled": false
+    },
+    "restore_on_startup": "none",
+    "soft_wrap": "editor_width",
+    "git": {
+        "inline_blame": {
+            "enabled": false
+        }
+    },
+    "auto_update": false,
+    "tab_bar": {
+        "show": true,
+        "show_nav_history_buttons": false,
+        "show_tab_bar_buttons": true
+    },
+    "toolbar": {
+        "breadcrumbs": false,
+        "quick_actions": false
+    },
+    "project_panel": {
+        "default_width": 240,
+        "indent_size": 24
+    },
+    "languages": {
+        "JSONC": {
+            "format_on_save": "language_server",
+            "tab_size": 4,
+            "soft_wrap": "preferred_line_length"
+        }
     }
-  },
-  "auto_update": false,
-  "tab_bar": {
-    "show": true,
-    "show_nav_history_buttons": false,
-    "show_tab_bar_buttons": true
-  },
-  "toolbar": {
-    "breadcrumbs": false,
-    "quick_actions": false
-  },
-  "project_panel": {
-    "default_width": 240,
-    "indent_size": 24
-  }
 }

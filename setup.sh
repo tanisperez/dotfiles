@@ -14,4 +14,4 @@ ln -s ~/dotfiles/kitty/custom.conf ~/dotfiles/.config/kitty/custom.conf
 
 # waybar
 ln -s ~/dotfiles/waybar/themes/tanis ~/dotfiles/.config/waybar/themes/tanis
-echo "/tanis;/tanis/white" > ~/dotfiles/.config/ml4w/settings
+echo "/tanis;/tanis/white" > ~/dotfiles/.config/ml4w/settings/waybar-theme.sh

@@ -15,6 +15,11 @@ echo -e "\e[1;32mSetting up Kitty...\e[0m"
 rm -f ~/dotfiles/.config/kitty/custom.conf
 ln -s ~/dotfiles/kitty/custom.conf ~/dotfiles/.config/kitty/custom.conf
 
+# nano
+echo -e "\e[1;32mSetting up nano...\e[0m"
+rm -f ~/.config/nano/nanorc
+ln -s ~/dotfiles/nano/nanorc ~/.config/nano/nanorc
+
 # waybar + ML4W
 echo -e "\e[1;32mSetting up Waybar theme...\e[0m"
 rm -f ~/dotfiles/.config/waybar/themes/tanis

@@ -41,3 +41,8 @@ echo -e "\e[1;32mSetting up Hyprland window rules...\e[0m"
 rm -f ~/dotfiles/.config/hypr/conf/windowrules/tanis-window-rules.conf
 ln -s ~/dotfiles/hypr/window-rules.conf ~/dotfiles/.config/hypr/conf/windowrules/tanis-window-rules.conf
 echo "source = ~/.config/hypr/conf/windowrules/tanis-window-rules.conf" > ~/dotfiles/.config/hypr/conf/windowrule.conf
+
+echo -e "\e[1;32mSetting up Hyprland windows...\e[0m"
+rm -f ~/dotfiles/.config/hypr/conf/windows/tanis-windows.conf
+ln -s ~/dotfiles/hypr/windows.conf ~/dotfiles/.config/hypr/conf/windows/tanis-windows.conf
+echo "source = ~/.config/hypr/conf/windows/tanis-windows.conf" > ~/dotfiles/.config/hypr/conf/window.conf

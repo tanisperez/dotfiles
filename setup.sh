@@ -20,6 +20,11 @@ echo -e "\e[1;32mSetting up nano...\e[0m"
 rm -f ~/.config/nano/nanorc
 ln -s ~/dotfiles/nano/nanorc ~/.config/nano/nanorc
 
+# oh-my-zsh
+echo -e "\e[1;32mSetting up oh-my-zsh...\e[0m"
+rm -f ~/.zshrc
+ln -s ~/dotfiles/zsh/zshrc ~/.zshrc
+
 # waybar + ML4W
 echo -e "\e[1;32mSetting up Waybar theme...\e[0m"
 rm -f ~/dotfiles/.config/waybar/themes/tanis

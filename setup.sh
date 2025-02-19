@@ -31,3 +31,8 @@ echo -e "\e[1;32mSetting up Hyprland keybindings...\e[0m"
 rm -f ~/dotfiles/.config/hypr/conf/keybindings/tanis-keybindings.conf
 ln -s ~/dotfiles/hypr/keybindings.conf ~/dotfiles/.config/hypr/conf/keybindings/tanis-keybindings.conf
 echo "source = ~/.config/hypr/conf/keybindings/tanis-keybindings.conf" > ~/dotfiles/.config/hypr/conf/keybinding.conf
+
+echo -e "\e[1;32mSetting up Hyprland monitors...\e[0m"
+rm -f ~/dotfiles/.config/hypr/conf/monitors/tanis-monitors.conf
+ln -s ~/dotfiles/hypr/monitors.conf ~/dotfiles/.config/hypr/conf/monitors/tanis-monitors.conf
+echo "source = ~/.config/hypr/conf/monitors/tanis-monitors.conf" > ~/dotfiles/.config/hypr/conf/monitor.conf

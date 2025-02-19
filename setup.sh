@@ -51,3 +51,6 @@ echo -e "\e[1;32mSetting up Hyprland workspaces...\e[0m"
 rm -f ~/dotfiles/.config/hypr/conf/workspaces/tanis-workspaces.conf
 ln -s ~/dotfiles/hypr/workspaces.conf ~/dotfiles/.config/hypr/conf/workspaces/tanis-workspaces.conf
 echo "source = ~/.config/hypr/conf/workspaces/tanis-workspaces.conf" > ~/dotfiles/.config/hypr/conf/workspace.conf
+
+echo -e "\e[1;32mSetting up Hyprland custom config...\e[0m"
+echo "source = ~/dotfiles/hypr/custom.conf" > ~/dotfiles/.config/hypr/conf/custom.conf

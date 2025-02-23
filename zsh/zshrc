@@ -17,7 +17,7 @@ fi
 # Exports
 # -----------------------------------------------------
 export EDITOR=nano
-export PATH="/usr/lib/ccache/bin/:$PATH"
+export PATH="/usr/lib/ccache/bin/:$PATH:/opt/apache-maven-3.9.9/bin"
 export ZSH="$HOME/.oh-my-zsh"
 
 # ssh-agent with gnome-keyring

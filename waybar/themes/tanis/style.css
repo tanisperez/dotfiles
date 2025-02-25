@@ -268,11 +268,11 @@ window#waybar.empty #window {
     background-color: @backgrounddark;
     color: @textcolor1;
     border-radius: 5px 5px 5px 5px;
-    padding: 0 12Vpx;
+    padding: 0 12px;
     margin: 2px 15px 2px 0px;
     opacity: 0.8;
     border: 3px solid @bordercolor;
-    background-image: url("archlinux-black.png");
+    background-image: url("./archlinux-black.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;

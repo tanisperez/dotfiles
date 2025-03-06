@@ -47,6 +47,19 @@ create_symlink_with_backup() {
     fi
 }
 
+set_config() {
+    local config=$1
+    local source=$2
+    local target=$3
+
+    if echo "source = $target" > "$source" 2>/dev/null; then
+        echo -e "\e[32m[✓] $config configured successfully\e[0m"
+    else
+        echo -e "\e[31m[✗] Error configuring $config\e[0m"
+        return 1
+    fi
+}
+
 # ssh
 create_symlink_with_backup "ssh" ~/.ssh/config ~/dotfiles/ssh/config
 # zed
@@ -65,21 +78,21 @@ echo "/tanis;/tanis/white" > ~/.config/ml4w/settings/waybar-theme.sh
 # Hyprland + ML4W
 # hyprland decorations
 create_symlink "hyprland decorations" ~/.config/hypr/conf/decorations/tanis-decorations.conf ~/dotfiles/hypr/decorations.conf
-echo "source = ~/.config/hypr/conf/decorations/tanis-decorations.conf" > ~/.config/hypr/conf/decoration.conf
+set_config "hyprland decorations" ~/.config/hypr/conf/decoration.conf ~/.config/hypr/conf/decorations/tanis-decorations.conf
 # hyprland keybindings
 create_symlink "hyprland keybindings" ~/.config/hypr/conf/keybindings/tanis-keybindings.conf ~/dotfiles/hypr/keybindings.conf
-echo "source = ~/.config/hypr/conf/keybindings/tanis-keybindings.conf" > ~/.config/hypr/conf/keybinding.conf
+set_config "hyprland keybindings" ~/.config/hypr/conf/keybinding.conf ~/.config/hypr/conf/keybindings/tanis-keybindings.conf
 # hyprland monitors
 create_symlink "hyprland monitors" ~/.config/hypr/conf/monitors/tanis-monitors.conf ~/dotfiles/hypr/monitors.conf
-echo "source = ~/.config/hypr/conf/monitors/tanis-monitors.conf" > ~/.config/hypr/conf/monitor.conf
+set_config "hyprland monitors" ~/.config/hypr/conf/monitor.conf ~/.config/hypr/conf/monitors/tanis-monitors.conf
 # hyprland window rules
 create_symlink "hyprland window rules" ~/.config/hypr/conf/windowrules/tanis-window-rules.conf ~/dotfiles/hypr/window-rules.conf
-echo "source = ~/.config/hypr/conf/windowrules/tanis-window-rules.conf" > ~/.config/hypr/conf/windowrule.conf
+set_config "hyprland window rules" ~/.config/hypr/conf/windowrule.conf ~/.config/hypr/conf/windowrules/tanis-window-rules.conf
 # hyprland windows
 create_symlink "hyprland windows" ~/.config/hypr/conf/windows/tanis-windows.conf ~/dotfiles/hypr/windows.conf
-echo "source = ~/.config/hypr/conf/windows/tanis-windows.conf" > ~/.config/hypr/conf/window.conf
+set_config "hyprland windows" ~/.config/hypr/conf/window.conf ~/.config/hypr/conf/windows/tanis-windows.conf
 # hyprland workspaces
 create_symlink "hyprland workspaces" ~/.config/hypr/conf/workspaces/tanis-workspaces.conf ~/dotfiles/hypr/workspaces.conf
-echo "source = ~/.config/hypr/conf/workspaces/tanis-workspaces.conf" > ~/.config/hypr/conf/workspace.conf
+set_config "hyprland workspaces" ~/.config/hypr/conf/workspace.conf ~/.config/hypr/conf/workspaces/tanis-workspaces.conf
 # hyprland custom config
-echo "source = ~/dotfiles/hypr/custom.conf" > ~/dotfiles/.config/hypr/conf/custom.conf
+set_config "hyprland custom config" ~/.config/hypr/conf/custom.conf ~/dotfiles/hypr/custom.conf

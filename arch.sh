@@ -7,7 +7,8 @@ sudo pacman -S
     man \
     less \
     loupe \ # Light image viewer
-    blueberry # Bluetooth Manager
+    blueberry \ # Bluetooth Manager
+    gnome-calculator
 
 
 systemctl --user enable --now gnome-keyring-daemon gcr-ssh-agent ssh-agent

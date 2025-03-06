@@ -10,6 +10,7 @@ sudo pacman -S
     blueberry \ # Bluetooth Manager
     gnome-calculator
 
+yay -S smile # emoji picker
 
 systemctl --user enable --now gnome-keyring-daemon gcr-ssh-agent ssh-agent
 ssh-add ~/.ssh/github

@@ -1,66 +1,85 @@
 #!/usr/bin/env bash
 
+is_not_symlink() {
+    if [ -L "$1" ]; then
+        return 1  # not a symlink
+    else
+        return 0  # it's a symlink
+    fi
+}
+
+create_symlink() {
+    local config=$1
+    local source=$2
+    local target=$3
+    
+    if is_not_symlink "$source"; then
+        if ln -sf "$target" "$source"; then
+            echo -e "\e[32m[✓] $config configured successfully\e[0m"
+        else
+            echo -e "\e[31m[✗] Error creating symlink for $config\e[0m"
+            return 1
+        fi
+    else
+        echo -e "\e[33m[!] $config symlink is already configured\e[0m"
+    fi
+}
+
+create_symlink_with_backup() {
+    local config=$1
+    local source=$2
+    local target=$3
+    
+    if is_not_symlink "$source"; then
+        if mv "$source" "$source.bak" 2>/dev/null; then
+            if ln -sf "$target" "$source"; then
+                echo -e "\e[32m[✓] $config configured successfully\e[0m"
+            else
+                echo -e "\e[31m[✗] Error creating symlink for $config\e[0m"
+                return 1
+            fi
+        else
+            echo -e "\e[31m[✗] Error backing up $config configuration\e[0m"
+            return 1
+        fi
+    else
+        echo -e "\e[33m[!] $config symlink is already configured\e[0m"
+    fi
+}
+
 # ssh
-echo -e "\e[1;32mSetting up ssh...\e[0m"
-rm -f ~/.ssh/config
-ln -s ~/dotfiles/ssh/config ~/.ssh/config
-
+create_symlink_with_backup "ssh" ~/.ssh/config ~/dotfiles/ssh/config
 # zed
-echo -e "\e[1;32mSetting up Zed...\e[0m"
-rm -f ~/.config/zed/settings.json
-ln -s ~/dotfiles/zed/settings.json ~/.config/zed/settings.json
-
+create_symlink_with_backup "zed" ~/.config/zed/settings.json ~/dotfiles/zed/settings.json
 # kitty
-echo -e "\e[1;32mSetting up Kitty...\e[0m"
-rm -f ~/dotfiles/.config/kitty/custom.conf
-ln -s ~/dotfiles/kitty/custom.conf ~/dotfiles/.config/kitty/custom.conf
-
+create_symlink_with_backup "kitty" ~/.config/kitty/custom.conf ~/dotfiles/kitty/custom.conf
 # nano
-echo -e "\e[1;32mSetting up nano...\e[0m"
-rm -f ~/.config/nano/nanorc
-ln -s ~/dotfiles/nano/nanorc ~/.config/nano/nanorc
-
+create_symlink_with_backup "nano" ~/.config/nano/nanorc ~/dotfiles/nano/nanorc
 # oh-my-zsh
-echo -e "\e[1;32mSetting up oh-my-zsh...\e[0m"
-rm -f ~/.zshrc
-ln -s ~/dotfiles/zsh/zshrc ~/.zshrc
+create_symlink_with_backup "oh-my-zsh" ~/.zshrc ~/dotfiles/zsh/zshrc
 
 # waybar + ML4W
-echo -e "\e[1;32mSetting up Waybar theme...\e[0m"
-rm -f ~/dotfiles/.config/waybar/themes/tanis
-ln -s ~/dotfiles/waybar/themes/tanis ~/dotfiles/.config/waybar/themes/tanis
-echo "/tanis;/tanis/white" > ~/dotfiles/.config/ml4w/settings/waybar-theme.sh
+create_symlink "waybar" ~/.config/waybar/themes/tanis ~/dotfiles/waybar/themes/tanis
+echo "/tanis;/tanis/white" > ~/.config/ml4w/settings/waybar-theme.sh
 
 # Hyprland + ML4W
-echo -e "\e[1;32mSetting up Hyprland decorations...\e[0m"
-rm -f ~/dotfiles/.config/hypr/conf/decorations/tanis-decorations.conf
-ln -s ~/dotfiles/hypr/decorations.conf ~/dotfiles/.config/hypr/conf/decorations/tanis-decorations.conf
-echo "source = ~/.config/hypr/conf/decorations/tanis-decorations.conf" > ~/dotfiles/.config/hypr/conf/decoration.conf
-
-echo -e "\e[1;32mSetting up Hyprland keybindings...\e[0m"
-rm -f ~/dotfiles/.config/hypr/conf/keybindings/tanis-keybindings.conf
-ln -s ~/dotfiles/hypr/keybindings.conf ~/dotfiles/.config/hypr/conf/keybindings/tanis-keybindings.conf
-echo "source = ~/.config/hypr/conf/keybindings/tanis-keybindings.conf" > ~/dotfiles/.config/hypr/conf/keybinding.conf
-
-echo -e "\e[1;32mSetting up Hyprland monitors...\e[0m"
-rm -f ~/dotfiles/.config/hypr/conf/monitors/tanis-monitors.conf
-ln -s ~/dotfiles/hypr/monitors.conf ~/dotfiles/.config/hypr/conf/monitors/tanis-monitors.conf
-echo "source = ~/.config/hypr/conf/monitors/tanis-monitors.conf" > ~/dotfiles/.config/hypr/conf/monitor.conf
-
-echo -e "\e[1;32mSetting up Hyprland window rules...\e[0m"
-rm -f ~/dotfiles/.config/hypr/conf/windowrules/tanis-window-rules.conf
-ln -s ~/dotfiles/hypr/window-rules.conf ~/dotfiles/.config/hypr/conf/windowrules/tanis-window-rules.conf
-echo "source = ~/.config/hypr/conf/windowrules/tanis-window-rules.conf" > ~/dotfiles/.config/hypr/conf/windowrule.conf
-
-echo -e "\e[1;32mSetting up Hyprland windows...\e[0m"
-rm -f ~/dotfiles/.config/hypr/conf/windows/tanis-windows.conf
-ln -s ~/dotfiles/hypr/windows.conf ~/dotfiles/.config/hypr/conf/windows/tanis-windows.conf
-echo "source = ~/.config/hypr/conf/windows/tanis-windows.conf" > ~/dotfiles/.config/hypr/conf/window.conf
-
-echo -e "\e[1;32mSetting up Hyprland workspaces...\e[0m"
-rm -f ~/dotfiles/.config/hypr/conf/workspaces/tanis-workspaces.conf
-ln -s ~/dotfiles/hypr/workspaces.conf ~/dotfiles/.config/hypr/conf/workspaces/tanis-workspaces.conf
-echo "source = ~/.config/hypr/conf/workspaces/tanis-workspaces.conf" > ~/dotfiles/.config/hypr/conf/workspace.conf
-
-echo -e "\e[1;32mSetting up Hyprland custom config...\e[0m"
+# hyprland decorations
+create_symlink "hyprland decorations" ~/.config/hypr/conf/decorations/tanis-decorations.conf ~/dotfiles/hypr/decorations.conf
+echo "source = ~/.config/hypr/conf/decorations/tanis-decorations.conf" > ~/.config/hypr/conf/decoration.conf
+# hyprland keybindings
+create_symlink "hyprland keybindings" ~/.config/hypr/conf/keybindings/tanis-keybindings.conf ~/dotfiles/hypr/keybindings.conf
+echo "source = ~/.config/hypr/conf/keybindings/tanis-keybindings.conf" > ~/.config/hypr/conf/keybinding.conf
+# hyprland monitors
+create_symlink "hyprland monitors" ~/.config/hypr/conf/monitors/tanis-monitors.conf ~/dotfiles/hypr/monitors.conf
+echo "source = ~/.config/hypr/conf/monitors/tanis-monitors.conf" > ~/.config/hypr/conf/monitor.conf
+# hyprland window rules
+create_symlink "hyprland window rules" ~/.config/hypr/conf/windowrules/tanis-window-rules.conf ~/dotfiles/hypr/window-rules.conf
+echo "source = ~/.config/hypr/conf/windowrules/tanis-window-rules.conf" > ~/.config/hypr/conf/windowrule.conf
+# hyprland windows
+create_symlink "hyprland windows" ~/.config/hypr/conf/windows/tanis-windows.conf ~/dotfiles/hypr/windows.conf
+echo "source = ~/.config/hypr/conf/windows/tanis-windows.conf" > ~/.config/hypr/conf/window.conf
+# hyprland workspaces
+create_symlink "hyprland workspaces" ~/.config/hypr/conf/workspaces/tanis-workspaces.conf ~/dotfiles/hypr/workspaces.conf
+echo "source = ~/.config/hypr/conf/workspaces/tanis-workspaces.conf" > ~/.config/hypr/conf/workspace.conf
+# hyprland custom config
 echo "source = ~/dotfiles/hypr/custom.conf" > ~/dotfiles/.config/hypr/conf/custom.conf

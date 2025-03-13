@@ -12,7 +12,7 @@ create_symlink() {
     local config=$1
     local source=$2
     local target=$3
-    
+
     if is_not_symlink "$source"; then
         if ln -sf "$target" "$source"; then
             echo -e "\e[32m[✓] $config configured successfully\e[0m"
@@ -29,7 +29,7 @@ create_symlink_with_backup() {
     local config=$1
     local source=$2
     local target=$3
-    
+
     if is_not_symlink "$source"; then
         if mv "$source" "$source.bak" 2>/dev/null; then
             if ln -sf "$target" "$source"; then
@@ -96,3 +96,7 @@ create_symlink "hyprland workspaces" ~/.config/hypr/conf/workspaces/tanis-worksp
 set_config "hyprland workspaces" ~/.config/hypr/conf/workspace.conf ~/.config/hypr/conf/workspaces/tanis-workspaces.conf
 # hyprland custom config
 set_config "hyprland custom config" ~/.config/hypr/conf/custom.conf ~/dotfiles/hypr/custom.conf
+
+# sddm theme
+sudo rm -Rf /usr/share/sddm/themes/tanis-sequoia
+sudo cp -fR ~/dotfiles/sddm/themes/tanis-sequoia /usr/share/sddm/themes/tanis-sequoia

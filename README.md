@@ -20,6 +20,7 @@ Otherwise, just `git clone` the repository inside the `$HOME` directory.
 
 ## TODO
 
+- [ ] Replace grub-silent with systemd-boot in the VM.
 - [ ] Copy some configs to root. For example: nanorc.
 - [ ] Add more alias: paccache, remove unused pacman packages and so on.
 - [ ] Explore tuned for laptop performance profiles.

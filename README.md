@@ -30,3 +30,4 @@ Otherwise, just `git clone` the repository inside the `$HOME` directory.
 - [ ] Explore some Screen cast software for Hyprland.
 - [ ] Explore a browser for screen sharing in Hyprland.
 - [ ] Explore a fast emoji picker.
+- [ ] Explore a WiFi list UI.

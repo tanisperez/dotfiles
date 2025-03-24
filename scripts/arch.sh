@@ -8,7 +8,8 @@ sudo pacman -S
     less \
     loupe \ # Light image viewer
     blueberry \ # Bluetooth Manager
-    gnome-calculator
+    gnome-calculator \
+    qt6-virtualkeyboard # Virtual Keyboard for SDDM
 
 yay -S smile # emoji picker
 

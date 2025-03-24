@@ -60,6 +60,19 @@ set_config() {
     fi
 }
 
+copy_as_root() {
+    local config=$1
+    local source=$2
+    local target=$3
+    
+    if sudo rm -Rf "$target" 2>/dev/null && sudo cp -Rf "$source" "$target" 2>/dev/null; then
+        echo -e "\e[32m[✓] $config configured successfully\e[0m"
+    else
+        echo -e "\e[31m[✗] Error configuring $config\e[0m"
+        return 1
+    fi
+}
+
 # ssh
 create_symlink_with_backup "ssh" ~/.ssh/config ~/dotfiles/ssh/config
 # zed
@@ -98,5 +111,4 @@ set_config "hyprland workspaces" ~/.config/hypr/conf/workspace.conf ~/.config/hy
 set_config "hyprland custom config" ~/.config/hypr/conf/custom.conf ~/dotfiles/hypr/custom.conf
 
 # sddm theme
-sudo rm -Rf /usr/share/sddm/themes/earth
-sudo cp -fR ~/dotfiles/sddm/themes/earth /usr/share/sddm/themes/earth
+copy_as_root "earth SSDM theme" ~/dotfiles/sddm/themes/earth /usr/share/sddm/themes/earth

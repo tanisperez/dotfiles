@@ -26,7 +26,6 @@ Otherwise, just `git clone` the repository inside the `$HOME` directory.
 - [ ] Explore tuned for laptop performance profiles.
 - [ ] Keep working on the Waybar theme.
 - [ ] Keep working on the SDDM theme.
-    - [ ] Copy custom SDDM config.
     - [ ] Fix icons in reboot, poweroff or hibernate buttons.
 - [ ] Translate Hyprlock.
 - [ ] Install oh-my-zsh in the root profile.

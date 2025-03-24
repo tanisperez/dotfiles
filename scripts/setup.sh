@@ -110,6 +110,13 @@ set_config "hyprland workspaces" ~/.config/hypr/conf/workspace.conf ~/.config/hy
 # hyprland custom config
 set_config "hyprland custom config" ~/.config/hypr/conf/custom.conf ~/dotfiles/hypr/custom.conf
 
+#########################
+# root stuff
+#########################
+
+# nanorc
+copy_as_root "nanorc" ~/dotfiles/nano/nanorc /root/.config/nano/nanorc
+
 # sddm theme
 copy_as_root "earth SSDM theme" ~/dotfiles/sddm/themes/earth /usr/share/sddm/themes/earth
 copy_as_root "SSDM config" ~/dotfiles/sddm/sddm.conf /etc/sddm.conf.d/sddm.conf

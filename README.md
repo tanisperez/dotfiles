@@ -26,6 +26,7 @@ Otherwise, just `git clone` the repository inside the `$HOME` directory.
 - [ ] Explore tuned for laptop performance profiles.
 - [ ] Keep working on the Waybar theme.
 - [ ] Keep working on the SDDM theme.
+    - [ ] Copy custom SDDM config.
 - [ ] Install oh-my-zsh in the root profile.
 - [ ] Explore some Screen cast software for Hyprland.
 - [ ] Explore a browser for screen sharing in Hyprland.

@@ -1,16 +1,6 @@
-> [!IMPORTANT]
-> I am in the process of migrating stuff out of GitHub.<br/>
-> Active development of this theme will take place [over here](https://codeberg.org/minMelody/sddm-sequoia). <sub>(Codeberg)</sub>
+# Earth theme
 
-# Readme
-
-Sequoia is a modern eye-candy theme for SDDM, making use of Nerd Fonts for its icons.
-
-Written from scratch, it is primarily made for standalone SDDM, aiming to be customisable with accessibility options.
-
-![theme-screenshot](preview.png "Preview")
-![session-menu](https://github.com/user-attachments/assets/ab06edb2-ea17-465b-8961-8330662de666 "Session selection")
-
+This theme is based on Sequoia theme from [minMelody](https://codeberg.org/minMelody/sddm-sequoia).
 
 ## Installation
 
@@ -29,7 +19,7 @@ Written from scratch, it is primarily made for standalone SDDM, aiming to be cus
 1- Once you have downloaded the tarball through the releases tab or cloning this repository, extract it to the SDDM theme directory *(change the archive path if needed)*:
 
 ```
-$ sudo tar -xzvf ~/sequoia.tar.gz -C /usr/share/sddm/themes
+$ sudo tar -xzvf ~/earth.tar.gz -C /usr/share/sddm/themes
 ```
 
 2- Edit your [SDDM config file](https://man.archlinux.org/man/sddm.conf.5) under `[Theme]` change `Current` to `Current=sequoia` *(make sure to match the theme name with the theme's directory)*
@@ -38,7 +28,7 @@ It should look like this:
 
 ```conf
 [Theme]
-Current=sequoia
+Current=earth
 ```
 
 ### On screen keyboard
@@ -64,7 +54,3 @@ $ sddm-greeter-qt6 --test-mode --theme /path/to/your/theme
 
 It's quite the time-saver when configuring your `theme.conf` file.
 
-## Support
-
-If you want to show support by buying me a coffee or send a tip feel free to visit my ko-fi page :3 <br/>
-[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/Y8Y0473AA)

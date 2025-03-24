@@ -5,6 +5,7 @@ sudo pacman -S
     seahorse \ # GNOME Keyring GUI
     gvfs-smb \ # Nautilus SMB support
     man \
+    tree \
     less \
     loupe \ # Light image viewer
     blueberry \ # Bluetooth Manager

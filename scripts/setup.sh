@@ -98,5 +98,5 @@ set_config "hyprland workspaces" ~/.config/hypr/conf/workspace.conf ~/.config/hy
 set_config "hyprland custom config" ~/.config/hypr/conf/custom.conf ~/dotfiles/hypr/custom.conf
 
 # sddm theme
-sudo rm -Rf /usr/share/sddm/themes/tanis-sequoia
-sudo cp -fR ~/dotfiles/sddm/themes/tanis-sequoia /usr/share/sddm/themes/tanis-sequoia
+sudo rm -Rf /usr/share/sddm/themes/earth
+sudo cp -fR ~/dotfiles/sddm/themes/earth /usr/share/sddm/themes/earth

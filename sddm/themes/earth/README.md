@@ -22,7 +22,7 @@ This theme is based on Sequoia theme from [minMelody](https://codeberg.org/minMe
 $ sudo tar -xzvf ~/earth.tar.gz -C /usr/share/sddm/themes
 ```
 
-2- Edit your [SDDM config file](https://man.archlinux.org/man/sddm.conf.5) under `[Theme]` change `Current` to `Current=sequoia` *(make sure to match the theme name with the theme's directory)*
+2- Edit your [SDDM config file](https://man.archlinux.org/man/sddm.conf.5) under `[Theme]` change `Current` to `Current=earth` *(make sure to match the theme name with the theme's directory)*
 
 It should look like this:
 

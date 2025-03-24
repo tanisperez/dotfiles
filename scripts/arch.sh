@@ -10,7 +10,8 @@ sudo pacman -S
     loupe \ # Light image viewer
     blueberry \ # Bluetooth Manager
     gnome-calculator \
-    qt6-virtualkeyboard # Virtual Keyboard for SDDM
+    qt6-virtualkeyboard \ # Virtual Keyboard for SDDM
+    rofi-emoji
 
 yay -S smile # emoji picker
 

@@ -112,3 +112,4 @@ set_config "hyprland custom config" ~/.config/hypr/conf/custom.conf ~/dotfiles/h
 
 # sddm theme
 copy_as_root "earth SSDM theme" ~/dotfiles/sddm/themes/earth /usr/share/sddm/themes/earth
+copy_as_root "SSDM config" ~/dotfiles/sddm/sddm.conf /etc/sddm.conf.d/sddm.conf

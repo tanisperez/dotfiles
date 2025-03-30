@@ -13,7 +13,8 @@ sudo pacman -S
     qt6-virtualkeyboard \ # Virtual Keyboard for SDDM
     rofi-emoji
 
-yay -S smile # emoji picker
+yay -S smile \ # emoji picker
+    bibata-cursor-theme-bin # cursor theme
 
 systemctl --user enable --now gnome-keyring-daemon gcr-ssh-agent ssh-agent
 ssh-add ~/.ssh/github

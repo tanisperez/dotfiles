@@ -104,34 +104,6 @@ window#waybar.empty #window {
 }
 
 /* -----------------------------------------------------
- * Taskbar
- * ----------------------------------------------------- */
-
-#taskbar {
-    background: @backgroundlight;
-    margin: 3px 15px 3px 0px;
-    padding: 0px;
-    border-radius: 5px 5px 5px 5px;
-    font-weight: normal;
-    font-style: normal;
-    opacity: 0.8;
-    border: 3px solid @backgroundlight;
-}
-
-#taskbar button {
-    margin: 0;
-    border-radius: 5px 5px 5px 5px;
-    padding: 0px 5px 0px 5px;
-}
-
-#taskbar.empty {
-    background: transparent;
-    border: 0;
-    padding: 0;
-    margin: 0;
-}
-
-/* -----------------------------------------------------
  * Modules
  * ----------------------------------------------------- */
 

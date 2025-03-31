@@ -11,7 +11,8 @@ sudo pacman -S
     blueberry \ # Bluetooth Manager
     gnome-calculator \
     qt6-virtualkeyboard \ # Virtual Keyboard for SDDM
-    rofi-emoji
+    rofi-emoji \
+    wlogout # Wayland logout menu
 
 yay -S smile \ # emoji picker
     bibata-cursor-theme-bin # cursor theme

@@ -37,6 +37,14 @@
         "clock"
     ],
 
+    // Rofi Application Launcher
+    "custom/appmenu": {
+        "format": " ",
+        "on-click": "sleep 0.2;pkill rofi || rofi -show drun -replace",
+        "on-click-right": "~/.config/hypr/scripts/keybindings.sh",
+        "tooltip-format": "Left: Open the application launcher\nRight: Show all keybindings"
+    },
+
     // Modules configuration
     // Workspaces
     "hyprland/workspaces": {
@@ -58,78 +66,40 @@
         }
     },
 
-    // ML4W Welcome App
-    "custom/ml4w-welcome": {
-        "on-click": "flatpak run com.ml4w.sidebar",
-        "format": " ",
-        "tooltip-format": "Open ML4W Sidebar App"
-    },
-
     // Empty
     "custom/empty": {
         "format": ""
     },
 
-    // Updates Count
-    "custom/updates": {
-        "format": "  {}",
-        "escape": true,
-        "return-type": "json",
-        "exec": "~/.config/ml4w/scripts/updates.sh",
-        "interval": 1800,
-        "on-click": "$(cat ~/.config/ml4w/settings/terminal.sh) --class dotfiles-floating -e ~/.config/ml4w/scripts/installupdates.sh",
-        "on-click-right": "~/.config/ml4w/settings/software.sh"
-    },
-
-    // Rofi Application Launcher
-    "custom/appmenu": {
-        "format": " ",
-        "on-click": "sleep 0.2;pkill rofi || rofi -show drun -replace",
-        "on-click-right": "~/.config/hypr/scripts/keybindings.sh",
-        "tooltip-format": "Left: Open the application launcher\nRight: Show all keybindings"
-    },
-
-    // Power Menu
-    "custom/exit": {
-        "format": "",
-        "on-click": "~/.config/ml4w/scripts/wlogout.sh",
-        "on-click-right": "hyprlock",
-        "tooltip-format": "Left: Power menu\nRight: Lock screen"
-    },
-
-    // SwayNC
-    "custom/notification": {
-        "tooltip-format": "Left: Notifications\nRight: Do not disturb",
-        "format": "{icon}",
+    // Pulseaudio
+    "pulseaudio": {
+        // "scroll-step": 1, // %, can be a float
+        "format": "{icon}  {volume}%",
+        "format-bluetooth": "{volume}% {icon} {format_source}",
+        "format-bluetooth-muted": " {icon} {format_source}",
+        "format-muted": " {format_source}",
+        "format-source": "{volume}% ",
+        "format-source-muted": "",
         "format-icons": {
-            "notification": "<span foreground='red'><sup></sup></span>",
-            "none": "",
-            "dnd-notification": "<span foreground='red'><sup></sup></span>",
-            "dnd-none": "",
-            "inhibited-notification": "<span foreground='red'><sup></sup></span>",
-            "inhibited-none": "",
-            "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
-            "dnd-inhibited-none": ""
+            "headphone": " ",
+            "hands-free": " ",
+            "headset": " ",
+            "phone": " ",
+            "portable": " ",
+            "car": " ",
+            "default": ["", "", ""]
         },
-        "return-type": "json",
-        "exec-if": "which swaync-client",
-        "exec": "swaync-client -swb",
-        "on-click": "swaync-client -t -sw",
-        "on-click-right": "swaync-client -d -sw",
-        "escape": true
+        "on-click": "pavucontrol"
     },
 
-    // System tray
-    "tray": {
-        "icon-size": 21,
-        "spacing": 10
-    },
-
-    // Clock
-    "clock": {
-        "format": "{:L%A %H:%M}",
-        "on-click": "flatpak run com.ml4w.calendar",
-        "tooltip": false
+    // Bluetooth
+    "bluetooth": {
+        "format": " ",
+        "format-disabled": " ",
+        "format-off": " ",
+        "interval": 30,
+        "on-click": "blueberry",
+        "format-no-controller": ""
     },
 
     // Network
@@ -163,34 +133,46 @@
         "format-icons": [" ", " ", " ", " ", " "]
     },
 
-    // Pulseaudio
-    "pulseaudio": {
-        // "scroll-step": 1, // %, can be a float
-        "format": "{icon}  {volume}%",
-        "format-bluetooth": "{volume}% {icon} {format_source}",
-        "format-bluetooth-muted": " {icon} {format_source}",
-        "format-muted": " {format_source}",
-        "format-source": "{volume}% ",
-        "format-source-muted": "",
-        "format-icons": {
-            "headphone": " ",
-            "hands-free": " ",
-            "headset": " ",
-            "phone": " ",
-            "portable": " ",
-            "car": " ",
-            "default": ["", "", ""]
-        },
-        "on-click": "pavucontrol"
+    // System tray
+    "tray": {
+        "icon-size": 21,
+        "spacing": 10
     },
 
-    // Bluetooth
-    "bluetooth": {
-        "format": " ",
-        "format-disabled": " ",
-        "format-off": " ",
-        "interval": 30,
-        "on-click": "blueberry",
-        "format-no-controller": ""
+    // SwayNC
+    "custom/notification": {
+        "tooltip-format": "Left: Notifications\nRight: Do not disturb",
+        "format": "{icon}",
+        "format-icons": {
+            "notification": "<span foreground='red'><sup></sup></span>",
+            "none": "",
+            "dnd-notification": "<span foreground='red'><sup></sup></span>",
+            "dnd-none": "",
+            "inhibited-notification": "<span foreground='red'><sup></sup></span>",
+            "inhibited-none": "",
+            "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
+            "dnd-inhibited-none": ""
+        },
+        "return-type": "json",
+        "exec-if": "which swaync-client",
+        "exec": "swaync-client -swb",
+        "on-click": "swaync-client -t -sw",
+        "on-click-right": "swaync-client -d -sw",
+        "escape": true
+    },
+
+    // Power Menu
+    "custom/exit": {
+        "format": "",
+        "on-click": "~/.config/ml4w/scripts/wlogout.sh",
+        "on-click-right": "hyprlock",
+        "tooltip-format": "Left: Power menu\nRight: Lock screen"
+    },
+
+    // Clock
+    "clock": {
+        "format": "{:L%A %H:%M}",
+        "on-click": "flatpak run com.ml4w.calendar",
+        "tooltip": false
     }
 }

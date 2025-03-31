@@ -83,8 +83,10 @@ create_symlink_with_backup "kitty" ~/.config/kitty/custom.conf ~/dotfiles/kitty/
 create_symlink_with_backup "nano" ~/.config/nano/nanorc ~/dotfiles/nano/nanorc
 # oh-my-zsh
 create_symlink_with_backup "oh-my-zsh" ~/.zshrc ~/dotfiles/zsh/zshrc
-# gtk settings
-create_symlink_with_backup "gtk settings" ~/.config/gtk-3.0/settings.ini ~/dotfiles/gtk-3.0/settings.ini
+# gtk-3.0 settings
+create_symlink_with_backup "gtk-3.0 settings" ~/.config/gtk-3.0/settings.ini ~/dotfiles/gtk-3.0/settings.ini
+# gtk-4.0 settings
+create_symlink_with_backup "gtk-4.0 settings" ~/.config/gtk-4.0/settings.ini ~/dotfiles/gtk-4.0/settings.ini
 # hyprland
 create_symlink "hyprland" ~/.config/hypr ~/dotfiles/hypr
 # wlogout

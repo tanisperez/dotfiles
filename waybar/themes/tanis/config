@@ -5,9 +5,6 @@
 //    \_/\_/ \__,_|\__, |_.__/ \__,_|_|
 //                 |___/
 //
-// by Stephan Raabe (2023)
-// -----------------------------------------------------
-//
 {
     // General Settings
     "layer": "top",
@@ -20,8 +17,7 @@
     // Modules Left
     "modules-left": [
         "custom/appmenu",
-        "hyprland/workspaces",
-        "custom/empty"
+        "hyprland/workspaces"
     ],
 
     // Modules Center
@@ -31,7 +27,6 @@
 
     // Modules Right
     "modules-right": [
-        "custom/updates",
         "pulseaudio",
         "bluetooth",
         "network",
@@ -45,157 +40,157 @@
     // Modules configuration
     // Workspaces
     "hyprland/workspaces": {
-    "on-scroll-up": "hyprctl dispatch workspace r-1",
-    "on-scroll-down": "hyprctl dispatch workspace r+1",
-    "on-click": "activate",
-    "active-only": false,
-    "all-outputs": true,
-    "format": "{}",
-    "format-icons": {
-        "urgent": "",
-        "active": "",
-        "default": ""
-    },
-    "persistent-workspaces": {
-        "DP-1": [2],
-        "DP-2": [1],
-        "eDP-1": 4
-    }
+        "on-scroll-up": "hyprctl dispatch workspace r-1",
+        "on-scroll-down": "hyprctl dispatch workspace r+1",
+        "on-click": "activate",
+        "active-only": false,
+        "all-outputs": true,
+        "format": "{}",
+        "format-icons": {
+            "urgent": "",
+            "active": "",
+            "default": ""
+        },
+        "persistent-workspaces": {
+            "DP-1": [2],
+            "DP-2": [1],
+            "eDP-1": 4
+        }
     },
 
     // ML4W Welcome App
     "custom/ml4w-welcome": {
-    "on-click": "flatpak run com.ml4w.sidebar",
-    "format": " ",
-    "tooltip-format": "Open ML4W Sidebar App"
+        "on-click": "flatpak run com.ml4w.sidebar",
+        "format": " ",
+        "tooltip-format": "Open ML4W Sidebar App"
     },
 
     // Empty
     "custom/empty": {
-    "format": ""
+        "format": ""
     },
 
     // Updates Count
     "custom/updates": {
-    "format": "  {}",
-    "escape": true,
-    "return-type": "json",
-    "exec": "~/.config/ml4w/scripts/updates.sh",
-    "interval": 1800,
-    "on-click": "$(cat ~/.config/ml4w/settings/terminal.sh) --class dotfiles-floating -e ~/.config/ml4w/scripts/installupdates.sh",
-    "on-click-right": "~/.config/ml4w/settings/software.sh"
+        "format": "  {}",
+        "escape": true,
+        "return-type": "json",
+        "exec": "~/.config/ml4w/scripts/updates.sh",
+        "interval": 1800,
+        "on-click": "$(cat ~/.config/ml4w/settings/terminal.sh) --class dotfiles-floating -e ~/.config/ml4w/scripts/installupdates.sh",
+        "on-click-right": "~/.config/ml4w/settings/software.sh"
     },
 
     // Rofi Application Launcher
     "custom/appmenu": {
-    "format": " ",
-    "on-click": "sleep 0.2;pkill rofi || rofi -show drun -replace",
-    "on-click-right": "~/.config/hypr/scripts/keybindings.sh",
-    "tooltip-format": "Left: Open the application launcher\nRight: Show all keybindings"
+        "format": " ",
+        "on-click": "sleep 0.2;pkill rofi || rofi -show drun -replace",
+        "on-click-right": "~/.config/hypr/scripts/keybindings.sh",
+        "tooltip-format": "Left: Open the application launcher\nRight: Show all keybindings"
     },
 
     // Power Menu
     "custom/exit": {
-    "format": "",
-    "on-click": "~/.config/ml4w/scripts/wlogout.sh",
-    "on-click-right": "hyprlock",
-    "tooltip-format": "Left: Power menu\nRight: Lock screen"
+        "format": "",
+        "on-click": "~/.config/ml4w/scripts/wlogout.sh",
+        "on-click-right": "hyprlock",
+        "tooltip-format": "Left: Power menu\nRight: Lock screen"
     },
 
     // SwayNC
     "custom/notification": {
-    "tooltip-format": "Left: Notifications\nRight: Do not disturb",
-    "format": "{icon}",
-    "format-icons": {
-        "notification": "<span foreground='red'><sup></sup></span>",
-        "none": "",
-        "dnd-notification": "<span foreground='red'><sup></sup></span>",
-        "dnd-none": "",
-        "inhibited-notification": "<span foreground='red'><sup></sup></span>",
-        "inhibited-none": "",
-        "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
-        "dnd-inhibited-none": ""
-    },
-    "return-type": "json",
-    "exec-if": "which swaync-client",
-    "exec": "swaync-client -swb",
-    "on-click": "swaync-client -t -sw",
-    "on-click-right": "swaync-client -d -sw",
-    "escape": true
+        "tooltip-format": "Left: Notifications\nRight: Do not disturb",
+        "format": "{icon}",
+        "format-icons": {
+            "notification": "<span foreground='red'><sup></sup></span>",
+            "none": "",
+            "dnd-notification": "<span foreground='red'><sup></sup></span>",
+            "dnd-none": "",
+            "inhibited-notification": "<span foreground='red'><sup></sup></span>",
+            "inhibited-none": "",
+            "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
+            "dnd-inhibited-none": ""
+        },
+        "return-type": "json",
+        "exec-if": "which swaync-client",
+        "exec": "swaync-client -swb",
+        "on-click": "swaync-client -t -sw",
+        "on-click-right": "swaync-client -d -sw",
+        "escape": true
     },
 
     // System tray
     "tray": {
-    "icon-size": 21,
-    "spacing": 10
+        "icon-size": 21,
+        "spacing": 10
     },
 
     // Clock
     "clock": {
-    "format": "{:L%A %H:%M}",
-    "on-click": "flatpak run com.ml4w.calendar",
-    "tooltip": false
+        "format": "{:L%A %H:%M}",
+        "on-click": "flatpak run com.ml4w.calendar",
+        "tooltip": false
     },
 
     // Network
     "network": {
-    "format": "{ifname}",
-    "format-wifi": "  ({signalStrength}%)",
-    "format-ethernet": "  {ifname}",
-    "format-disconnected": "Disconnected ⚠",
-    "tooltip-format": " {ifname} via {gwaddri}",
-    "tooltip-format-wifi": "  {ifname} @ {essid}\nIP: {ipaddr}\nStrength: {signalStrength}%\nFreq: {frequency}MHz\nUp: {bandwidthUpBits} Down: {bandwidthDownBits}",
-    "tooltip-format-ethernet": " {ifname}\nIP: {ipaddr}\n up: {bandwidthUpBits} down: {bandwidthDownBits}",
-    "tooltip-format-disconnected": "Disconnected",
-    "max-length": 50,
-    "on-click": "~/.config/ml4w/settings/networkmanager.sh",
-    "on-click-right": "~/.config/ml4w/scripts/nm-applet.sh toggle"
+        "format": "{ifname}",
+        "format-wifi": "  ({signalStrength}%)",
+        "format-ethernet": "  {ifname}",
+        "format-disconnected": "Disconnected ⚠",
+        "tooltip-format": " {ifname} via {gwaddri}",
+        "tooltip-format-wifi": "  {ifname} @ {essid}\nIP: {ipaddr}\nStrength: {signalStrength}%\nFreq: {frequency}MHz\nUp: {bandwidthUpBits} Down: {bandwidthDownBits}",
+        "tooltip-format-ethernet": " {ifname}\nIP: {ipaddr}\n up: {bandwidthUpBits} down: {bandwidthDownBits}",
+        "tooltip-format-disconnected": "Disconnected",
+        "max-length": 50,
+        "on-click": "~/.config/ml4w/settings/networkmanager.sh",
+        "on-click-right": "~/.config/ml4w/scripts/nm-applet.sh toggle"
     },
 
     // Battery
     "battery": {
-    "states": {
-        // "good": 95,
-        "warning": 30,
-        "critical": 15
-    },
-    "format": "{icon} {capacity}%",
-    "format-charging": "  {capacity}%",
-    "format-plugged": "  {capacity}%",
-    "format-alt": "{icon}  {time}",
-    // "format-good": "", // An empty format will hide the module
-    // "format-full": "",
-    "format-icons": [" ", " ", " ", " ", " "]
+        "states": {
+            // "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon} {capacity}%",
+        "format-charging": "  {capacity}%",
+        "format-plugged": "  {capacity}%",
+        "format-alt": "{icon}  {time}",
+        // "format-good": "", // An empty format will hide the module
+        // "format-full": "",
+        "format-icons": [" ", " ", " ", " ", " "]
     },
 
     // Pulseaudio
     "pulseaudio": {
-    // "scroll-step": 1, // %, can be a float
-    "format": "{icon}  {volume}%",
-    "format-bluetooth": "{volume}% {icon} {format_source}",
-    "format-bluetooth-muted": " {icon} {format_source}",
-    "format-muted": " {format_source}",
-    "format-source": "{volume}% ",
-    "format-source-muted": "",
-    "format-icons": {
-        "headphone": " ",
-        "hands-free": " ",
-        "headset": " ",
-        "phone": " ",
-        "portable": " ",
-        "car": " ",
-        "default": ["", "", ""]
-    },
-    "on-click": "pavucontrol"
+        // "scroll-step": 1, // %, can be a float
+        "format": "{icon}  {volume}%",
+        "format-bluetooth": "{volume}% {icon} {format_source}",
+        "format-bluetooth-muted": " {icon} {format_source}",
+        "format-muted": " {format_source}",
+        "format-source": "{volume}% ",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": " ",
+            "hands-free": " ",
+            "headset": " ",
+            "phone": " ",
+            "portable": " ",
+            "car": " ",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol"
     },
 
     // Bluetooth
     "bluetooth": {
-    "format": " ",
-    "format-disabled": " ",
-    "format-off": " ",
-    "interval": 30,
-    "on-click": "blueberry",
-    "format-no-controller": ""
+        "format": " ",
+        "format-disabled": " ",
+        "format-off": " ",
+        "interval": 30,
+        "on-click": "blueberry",
+        "format-no-controller": ""
     }
 }

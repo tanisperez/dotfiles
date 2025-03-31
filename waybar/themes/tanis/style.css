@@ -158,34 +158,6 @@ window#waybar.empty #window {
 }
 
 /* -----------------------------------------------------
- * Custom Updates
- * ----------------------------------------------------- */
-
-#custom-updates {
-    background-color: @backgroundlight;
-    font-size: 16px;
-    color: @textcolor2;
-    border-radius: 5px 5px 5px 5px;
-    padding: 2px 10px 0px 10px;
-    margin: 3px 15px 3px 0px;
-    opacity: 0.8;
-}
-
-#custom-updates.green {
-    background-color: @backgroundlight;
-}
-
-#custom-updates.yellow {
-    background-color: #ff9a3c;
-    color: #ffffff;
-}
-
-#custom-updates.red {
-    background-color: #dc2f2f;
-    color: #ffffff;
-}
-
-/* -----------------------------------------------------
  * Hardware Group
  * ----------------------------------------------------- */
 

@@ -86,7 +86,7 @@ create_symlink_with_backup "oh-my-zsh" ~/.zshrc ~/dotfiles/zsh/zshrc
 # gtk settings
 create_symlink_with_backup "gtk settings" ~/.config/gtk-3.0/settings.ini ~/dotfiles/gtk-3.0/settings.ini
 # hyprland
-create_symlink_with_backup "hyprland" ~/.config/hypr/hyprland.conf ~/dotfiles/hypr/hyprland.conf
+create_symlink "hyprland" ~/.config/hypr ~/dotfiles/hypr
 # wlogout
 create_symlink "wlogout" ~/.config/wlogout ~/dotfiles/wlogout 
 

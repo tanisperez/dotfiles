@@ -31,6 +31,7 @@ sudo pacman -S
     transmission-gtk \ # Torrent client
     rofi \
     rofi-emoji \
+    ttf-jetbrains-mono-nerd \ # JetBrains Mono Nerd Font
     wlogout # Wayland logout menu
 
 yay -S 

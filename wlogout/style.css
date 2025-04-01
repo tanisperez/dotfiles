@@ -41,7 +41,7 @@ by Stephan Raabe (2023)
 }
 
 window {
-	background: url("../wallpapers/Earth.jpg");
+	background: url("Earth.jpg");
 	background-size: cover;
 	font-size: 16pt;
 	color: #cdd6f4;

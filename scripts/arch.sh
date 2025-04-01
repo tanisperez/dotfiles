@@ -32,6 +32,9 @@ sudo pacman -S
     rofi \
     rofi-emoji \
     ttf-jetbrains-mono-nerd \ # JetBrains Mono Nerd Font
+    ttf-montserrat \ # Montserrat Font
+    ttf-fira-sans \ # Fira Sans Font
+    ttf-font-awesome \ # Font Awesome
     wlogout # Wayland logout menu
 
 yay -S 

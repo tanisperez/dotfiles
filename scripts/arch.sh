@@ -29,6 +29,7 @@ sudo pacman -S
     gnome-disk-utility \ # Disk manager
     qt6-virtualkeyboard \ # Virtual Keyboard for SDDM
     transmission-gtk \ # Torrent client
+    swaync \ # Notifications
     rofi \
     rofi-emoji \
     ttf-jetbrains-mono-nerd \ # JetBrains Mono Nerd Font

@@ -91,8 +91,6 @@ create_symlink_with_backup "gtk-4.0 settings" ~/.config/gtk-4.0/settings.ini ~/d
 create_symlink "hyprland" ~/.config/hypr ~/dotfiles/hypr
 # wlogout
 create_symlink "wlogout" ~/.config/wlogout ~/dotfiles/wlogout 
-# waypaper
-create_symlink "waypaper" ~/.config/waypaper ~/dotfiles/waypaper 
 
 #########################
 # root stuff

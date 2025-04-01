@@ -47,19 +47,6 @@ create_symlink_with_backup() {
     fi
 }
 
-set_config() {
-    local config=$1
-    local source=$2
-    local target=$3
-
-    if echo "source = $target" > "$source" 2>/dev/null; then
-        echo -e "\e[32m[✓] $config configured successfully\e[0m"
-    else
-        echo -e "\e[31m[✗] Error configuring $config\e[0m"
-        return 1
-    fi
-}
-
 copy_as_root() {
     local config=$1
     local source=$2

@@ -1,5 +1,8 @@
 #!/usr/bin/env bah
 
+# Update the current system
+sudo pacman -Syu
+
 sudo pacman -S
     gnome-keyring \ # GNOME credentials
     seahorse \ # GNOME Keyring GUI
@@ -7,10 +10,26 @@ sudo pacman -S
     man \
     tree \
     less \
+    htop \
+    btop \
+    nvtop \
+    neofetch \
     loupe \ # Light image viewer
+    evince \ # PDF viewer
+    fzf \ # Fuzzy finder
+    pinta \ # Image editor  
+    zed \ # Zed text editor
+    nwg-displays \ # Hyprland Display manager
+    nwg-look \ # Hyprland Look manager
+    pacseek \ # Pacman GUI
+    cliphist \ # Clipboard history
     blueberry \ # Bluetooth Manager
     gnome-calculator \
+    vlc \
+    gnome-disk-utility \ # Disk manager
     qt6-virtualkeyboard \ # Virtual Keyboard for SDDM
+    transmission-gtk \ # Torrent client
+    rofi \
     rofi-emoji \
     wlogout # Wayland logout menu
 

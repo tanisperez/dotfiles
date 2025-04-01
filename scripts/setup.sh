@@ -78,7 +78,7 @@ create_symlink_with_backup "ssh" ~/.ssh/config ~/dotfiles/ssh/config
 # zed
 create_symlink_with_backup "zed" ~/.config/zed/settings.json ~/dotfiles/zed/settings.json
 # kitty
-create_symlink_with_backup "kitty" ~/.config/kitty/custom.conf ~/dotfiles/kitty/custom.conf
+create_symlink_with_backup "kitty" ~/.config/kitty/kitty.conf ~/dotfiles/kitty/kitty.conf
 # nano
 create_symlink_with_backup "nano" ~/.config/nano/nanorc ~/dotfiles/nano/nanorc
 # oh-my-zsh

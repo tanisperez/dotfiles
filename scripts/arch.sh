@@ -15,7 +15,8 @@ sudo pacman -S
     wlogout # Wayland logout menu
 
 yay -S smile \ # emoji picker
-    bibata-cursor-theme-bin # cursor theme
+    bibata-cursor-theme-bin \ # cursor theme
+    waypaper
 
 systemctl --user enable --now gnome-keyring-daemon gcr-ssh-agent ssh-agent
 ssh-add ~/.ssh/github

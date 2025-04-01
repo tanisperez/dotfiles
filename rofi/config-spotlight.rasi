@@ -20,12 +20,18 @@
     spacing:    0;
 }
 
+configuration {
+    show-icons: true;
+}
+
 window {
     background-color:   @bg0;
 
     location:       center;
     width:          640;
     border-radius:  8;
+    border:             1px;
+    border-color:       @bg1;
 }
 
 inputbar {

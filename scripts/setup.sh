@@ -83,4 +83,5 @@ copy_as_root "nanorc" ~/dotfiles/nano/nanorc /root/.config/nano/nanorc
 
 # sddm theme
 copy_as_root "earth SSDM theme" ~/dotfiles/sddm/themes/earth /usr/share/sddm/themes/earth
+sudo mkdir -p /etc/sddm.conf.d
 copy_as_root "SSDM config" ~/dotfiles/sddm/sddm.conf /etc/sddm.conf.d/sddm.conf

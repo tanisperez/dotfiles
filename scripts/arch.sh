@@ -38,6 +38,7 @@ packages=(
     ttf-font-awesome       # Font Awesome
     xdg-desktop-portal-hyprland  # Screen casting for Hyprland
     wlogout               # Wayland logout menu
+    waybar
 )
 
 

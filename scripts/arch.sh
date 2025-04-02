@@ -50,13 +50,13 @@ cd yay-bin
 makepkg -si
 
 
-yay-packages=( 
+yay_packages=( 
     pinta       # Image editor
     pacseek     # Pacman GUI
     wlogout     # Wayland logout menu
     bibata-cursor-theme-bin # cursor theme
 )
-yay -S "${packages[@]}"
+yay -S "${yay_packages[@]}"
 
 # oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"

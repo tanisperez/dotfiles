@@ -4,6 +4,8 @@
 sudo pacman -Syu
 
 packages=(
+    git
+    base-devel
     gnome-keyring     # GNOME credentials
     seahorse          # GNOME Keyring GUI
     gvfs-smb          # Nautilus SMB support
@@ -17,11 +19,9 @@ packages=(
     loupe            # Light image viewer
     evince           # PDF viewer
     fzf              # Fuzzy finder
-    # pinta            # Image editor
     zed              # Zed text editor
     nwg-displays     # Hyprland Display manager
     nwg-look         # Hyprland Look manager
-    # pacseek          # Pacman GUI
     cliphist         # Clipboard history
     blueberry        # Bluetooth Manager
     gnome-calculator
@@ -29,7 +29,7 @@ packages=(
     gnome-disk-utility     # Disk manager
     qt6-virtualkeyboard    # Virtual Keyboard for SDDM
     transmission-gtk       # Torrent client
-    swaync               # Notifications
+    swaync                 # Notifications
     rofi
     rofi-emoji
     ttf-jetbrains-mono-nerd  # JetBrains Mono Nerd Font
@@ -37,15 +37,29 @@ packages=(
     ttf-fira-sans          # Fira Sans Font
     ttf-font-awesome       # Font Awesome
     xdg-desktop-portal-hyprland  # Screen casting for Hyprland
-    # wlogout               # Wayland logout menu
     waybar
     zsh
 )
 
-
 sudo pacman -S "${packages[@]}"
 
-yay -S bibata-cursor-theme-bin # cursor theme
+# yay
+cd /tmp
+git clone https://aur.archlinux.org/yay-bin.git
+cd yay-bin
+makepkg -si
 
-systemctl --user enable --now gnome-keyring-daemon gcr-ssh-agent ssh-agent
-ssh-add ~/.ssh/github
+
+yay-packages=( 
+    pinta       # Image editor
+    pacseek     # Pacman GUI
+    wlogout     # Wayland logout menu
+    bibata-cursor-theme-bin # cursor theme
+)
+yay -S "${packages[@]}"
+
+# oh-my-zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+#systemctl --user enable --now gnome-keyring-daemon gcr-ssh-agent ssh-agent
+#ssh-add ~/.ssh/github

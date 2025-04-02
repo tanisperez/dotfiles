@@ -42,6 +42,8 @@ packages=(
     ttf-font-awesome       # Font Awesome
     papirus-icon-theme
     xdg-desktop-portal-hyprland  # Screen casting for Hyprland
+    xdg-desktop-portal-gnome
+    xdg-desktop-portal
     waybar
     zsh
     zsh-autosuggestions

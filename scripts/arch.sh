@@ -17,11 +17,11 @@ packages=(
     loupe            # Light image viewer
     evince           # PDF viewer
     fzf              # Fuzzy finder
-    pinta            # Image editor
+    # pinta            # Image editor
     zed              # Zed text editor
     nwg-displays     # Hyprland Display manager
     nwg-look         # Hyprland Look manager
-    pacseek          # Pacman GUI
+    # pacseek          # Pacman GUI
     cliphist         # Clipboard history
     blueberry        # Bluetooth Manager
     gnome-calculator
@@ -37,7 +37,7 @@ packages=(
     ttf-fira-sans          # Fira Sans Font
     ttf-font-awesome       # Font Awesome
     xdg-desktop-portal-hyprland  # Screen casting for Hyprland
-    wlogout               # Wayland logout menu
+    # wlogout               # Wayland logout menu
     waybar
 )
 

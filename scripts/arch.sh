@@ -34,6 +34,7 @@ packages=(
     qt6-virtualkeyboard    # Virtual Keyboard for SDDM
     transmission-gtk       # Torrent client
     swaync                 # Notifications
+    pavucontrol
     rofi
     rofi-emoji
     ttf-jetbrains-mono-nerd  # JetBrains Mono Nerd Font

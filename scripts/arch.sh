@@ -16,6 +16,9 @@ packages=(
     btop
     nvtop
     neofetch
+    hyprpaper
+    hypridle
+    hyprlock
     loupe            # Light image viewer
     evince           # PDF viewer
     fzf              # Fuzzy finder

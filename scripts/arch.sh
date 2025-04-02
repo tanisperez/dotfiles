@@ -39,6 +39,7 @@ packages=(
     xdg-desktop-portal-hyprland  # Screen casting for Hyprland
     waybar
     zsh
+    zsh-autosuggestions
 )
 
 sudo pacman -S "${packages[@]}"

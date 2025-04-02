@@ -16,6 +16,7 @@ packages=(
     btop
     nvtop
     neofetch
+    nautilus
     hyprpaper
     hypridle
     hyprlock

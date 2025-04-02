@@ -40,6 +40,7 @@ packages=(
     ttf-montserrat          # Montserrat Font
     ttf-fira-sans          # Fira Sans Font
     ttf-font-awesome       # Font Awesome
+    papirus-icon-theme
     xdg-desktop-portal-hyprland  # Screen casting for Hyprland
     waybar
     zsh

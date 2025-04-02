@@ -39,6 +39,7 @@ packages=(
     xdg-desktop-portal-hyprland  # Screen casting for Hyprland
     # wlogout               # Wayland logout menu
     waybar
+    zsh
 )
 
 

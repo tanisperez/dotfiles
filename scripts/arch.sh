@@ -17,7 +17,7 @@ sudo pacman -S
     loupe \ # Light image viewer
     evince \ # PDF viewer
     fzf \ # Fuzzy finder
-    pinta \ # Image editor  
+    pinta \ # Image editor
     zed \ # Zed text editor
     nwg-displays \ # Hyprland Display manager
     nwg-look \ # Hyprland Look manager
@@ -36,9 +36,10 @@ sudo pacman -S
     ttf-montserrat \ # Montserrat Font
     ttf-fira-sans \ # Fira Sans Font
     ttf-font-awesome \ # Font Awesome
+    xdg-desktop-portal-hyprland \ # Screen casting for Hyprland
     wlogout # Wayland logout menu
 
-yay -S 
+yay -S
     # smile \ # emoji picker
     bibata-cursor-theme-bin # cursor theme
 

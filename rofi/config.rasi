@@ -52,8 +52,7 @@ configuration {
 * { current-image: url("~/dotfiles/wallpapers/Earth.jpg", height); }
 
 
-/* ---- Load border width ---- */
-@import "~/.config/ml4w/settings/rofi-border.rasi"
+* { border-width: 3px; }
 
 /* ---- Load border radius ---- */
 @import "~/.config/ml4w/settings/rofi-border-radius.rasi"

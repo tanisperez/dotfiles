@@ -55,8 +55,7 @@ configuration {
 
 * { border-width: 3px; }
 
-/* ---- Load border radius ---- */
-@import "~/.config/ml4w/settings/rofi-border-radius.rasi"
+* { border-radius: 2em; }
 
 // Main //
 window {

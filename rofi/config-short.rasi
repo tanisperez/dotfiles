@@ -50,8 +50,8 @@ configuration {
 }
 
 
-/* ---- Load wallpaper ---- */
-@import "~/.config/ml4w/cache/current_wallpaper.rasi"
+* { current-image: url("~/dotfiles/wallpapers/Earth.jpg", height); }
+
 
 /* ---- Load border width ---- */
 @import "~/.config/ml4w/settings/rofi-border.rasi"

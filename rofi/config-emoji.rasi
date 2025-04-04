@@ -28,9 +28,6 @@ configuration {
     
 }
 
-/* ---- Load font ---- */
-@import "~/.config/ml4w/settings/rofi-font.rasi"
-
 * {
     background: rgba(0,0,1,0.5);
     foreground: #FFFFFF;

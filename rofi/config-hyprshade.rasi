@@ -31,8 +31,26 @@ configuration {
 /* ---- Load font ---- */
 @import "~/.config/ml4w/settings/rofi-font.rasi"
 
-/* ---- Load pywal colors (custom wal template) ---- */
-@theme "~/.cache/wal/colors-rofi-pywal"
+* {
+    background: rgba(0,0,1,0.5);
+    foreground: #FFFFFF;
+    color0:     #000000;
+    color1:     #575965;
+    color2:     #857C7D;
+    color3:     #285797;
+    color4:     #5F7293;
+    color5:     #6795C6;
+    color6:     #9B9AA4;
+    color7:     #c9d5e2;
+    color8:     #8c959e;
+    color9:     #575965;
+    color10:    #857C7D;
+    color11:    #285797;
+    color12:    #5F7293;
+    color13:    #6795C6;
+    color14:    #9B9AA4;
+    color15:    #c9d5e2;
+}
 
 /* ---- Load wallpaper ---- */
 @import "~/.config/ml4w/cache/current_wallpaper.rasi"

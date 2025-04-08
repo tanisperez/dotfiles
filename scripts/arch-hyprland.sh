@@ -9,7 +9,6 @@ packages=(
     gnome-keyring     # GNOME credentials
     seahorse          # GNOME Keyring GUI
     gvfs-smb          # Nautilus SMB support
-    power-profiles-daemon # Power profiles
     man
     tree
     less
@@ -60,7 +59,7 @@ cd yay-bin
 makepkg -si
 
 
-yay_packages=( 
+yay_packages=(
     pinta       # Image editor
     pacseek     # Pacman GUI
     wlogout     # Wayland logout menu
@@ -75,7 +74,3 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 
 #systemctl --user enable --now gnome-keyring-daemon gcr-ssh-agent ssh-agent
 #ssh-add ~/.ssh/github
-
-
-# Power profiles
-sudo systemctl enable power-profiles-daemon.service

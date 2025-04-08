@@ -46,7 +46,7 @@ copy_as_root() {
     local config=$1
     local source=$2
     local target=$3
-    
+
     if sudo rm -Rf "$target" 2>/dev/null && sudo cp -Rf "$source" "$target" 2>/dev/null; then
         echo -e "\e[32m[✓] $config configured successfully\e[0m"
     else
@@ -56,7 +56,7 @@ copy_as_root() {
 }
 
 # ssh
-create_symlink_with_backup "ssh" ~/.ssh/config ~/dotfiles/ssh/config
+# create_symlink_with_backup "ssh" ~/.ssh/config ~/dotfiles/ssh/config
 # zed
 create_symlink_with_backup "zed" ~/.config/zed/settings.json ~/dotfiles/zed/settings.json
 # kitty
@@ -66,13 +66,13 @@ create_symlink_with_backup "nano" ~/.config/nano ~/dotfiles/nano
 # oh-my-zsh
 create_symlink_with_backup "oh-my-zsh" ~/.zshrc ~/dotfiles/zsh/zshrc
 # gtk-3.0 settings
-create_symlink_with_backup "gtk-3.0 settings" ~/.config/gtk-3.0 ~/dotfiles/gtk-3.0
+# create_symlink_with_backup "gtk-3.0 settings" ~/.config/gtk-3.0 ~/dotfiles/gtk-3.0
 # gtk-4.0 settings
-create_symlink_with_backup "gtk-4.0 settings" ~/.config/gtk-4.0 ~/dotfiles/gtk-4.0
+# create_symlink_with_backup "gtk-4.0 settings" ~/.config/gtk-4.0 ~/dotfiles/gtk-4.0
 # hyprland
-create_symlink_with_backup "hyprland" ~/.config/hypr ~/dotfiles/hypr
+# create_symlink_with_backup "hyprland" ~/.config/hypr ~/dotfiles/hypr
 # wlogout
-create_symlink_with_backup "wlogout" ~/.config/wlogout ~/dotfiles/wlogout 
+# create_symlink_with_backup "wlogout" ~/.config/wlogout ~/dotfiles/wlogout
 
 #########################
 # root stuff
@@ -82,6 +82,6 @@ create_symlink_with_backup "wlogout" ~/.config/wlogout ~/dotfiles/wlogout
 copy_as_root "nanorc" ~/dotfiles/nano/nanorc /root/.config/nano/nanorc
 
 # sddm theme
-copy_as_root "earth SSDM theme" ~/dotfiles/sddm/themes/earth /usr/share/sddm/themes/earth
-sudo mkdir -p /etc/sddm.conf.d
-copy_as_root "SSDM config" ~/dotfiles/sddm/sddm.conf /etc/sddm.conf.d/sddm.conf
+# copy_as_root "earth SSDM theme" ~/dotfiles/sddm/themes/earth /usr/share/sddm/themes/earth
+# sudo mkdir -p /etc/sddm.conf.d
+# copy_as_root "SSDM config" ~/dotfiles/sddm/sddm.conf /etc/sddm.conf.d/sddm.conf

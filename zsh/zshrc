@@ -20,15 +20,11 @@ export EDITOR=nano
 export PATH="/usr/lib/ccache/bin/:$PATH:/opt/apache-maven-3.9.9/bin"
 export ZSH="$HOME/.oh-my-zsh"
 
-# ssh-agent with gnome-keyring
-export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
-
 # -----------------------------------------------------
 # ALIASES
 # -----------------------------------------------------
 alias ll='ls -lh'
 alias la='ls -lah'
-alias wifi='nmtui'
 alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 alias zed='/usr/bin/zeditor'
 

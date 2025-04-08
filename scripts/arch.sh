@@ -9,6 +9,7 @@ packages=(
     gnome-keyring     # GNOME credentials
     seahorse          # GNOME Keyring GUI
     gvfs-smb          # Nautilus SMB support
+    power-profiles-daemon # Power profiles
     man
     tree
     less
@@ -74,3 +75,7 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 
 #systemctl --user enable --now gnome-keyring-daemon gcr-ssh-agent ssh-agent
 #ssh-add ~/.ssh/github
+
+
+# Power profiles
+sudo systemctl enable power-profiles-daemon.service

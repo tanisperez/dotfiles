@@ -27,7 +27,6 @@ Otherwise, just `git clone` the repository inside the `$HOME` directory.
 - [ ] Keep working on the Waybar theme.
 - [ ] Keep working on the SDDM theme.
     - [ ] Fix icons in reboot, poweroff or hibernate buttons.
-- [ ] Translate Hyprlock.
 - [ ] Install oh-my-zsh in the root profile.
 - [ ] Explore some Screen cast software for Hyprland.
 - [ ] Explore a browser for screen sharing in Hyprland.

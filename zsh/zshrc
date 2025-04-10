@@ -19,6 +19,7 @@ fi
 export EDITOR=nano
 export PATH="/usr/lib/ccache/bin/:$PATH:/opt/apache-maven-3.9.9/bin"
 export ZSH="$HOME/.oh-my-zsh"
+export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent.socket
 
 # -----------------------------------------------------
 # ALIASES

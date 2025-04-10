@@ -25,6 +25,7 @@ packages=(
     zsh-autosuggestions
     ttf-jetbrains-mono
     gocryptfs # KWallet
+    fuse
 )
 
 sudo pacman -S "${packages[@]}"

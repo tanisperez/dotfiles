@@ -56,7 +56,7 @@ copy_as_root() {
 }
 
 # ssh
-# create_symlink_with_backup "ssh" ~/.ssh/config ~/dotfiles/ssh/config
+create_symlink_with_backup "ssh" ~/.ssh/config ~/dotfiles/ssh/config
 # zed
 create_symlink_with_backup "zed" ~/.config/zed/settings.json ~/dotfiles/zed/settings.json
 # kitty

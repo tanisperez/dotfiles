@@ -24,6 +24,7 @@ packages=(
     zsh
     zsh-autosuggestions
     ttf-jetbrains-mono
+    kwalletmanager
     gocryptfs # KWallet
     fuse
 )

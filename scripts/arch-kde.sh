@@ -23,6 +23,7 @@ packages=(
     transmission-qt  # Torrent client
     zsh
     zsh-autosuggestions
+    ttf-jetbrains-mono
 )
 
 sudo pacman -S "${packages[@]}"

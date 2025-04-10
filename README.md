@@ -24,7 +24,6 @@ Otherwise, just `git clone` the repository inside the `$HOME` directory.
 - [ ] Copy some configs to root. For example: nanorc.
     - [X] nanorc.
 - [ ] Add more alias: paccache, remove unused pacman packages and so on.
-- [ ] Explore tuned for laptop performance profiles.
 - [ ] Keep working on the Waybar theme.
 - [ ] Keep working on the SDDM theme.
     - [ ] Fix icons in reboot, poweroff or hibernate buttons.

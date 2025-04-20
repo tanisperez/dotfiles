@@ -65,10 +65,6 @@ create_symlink_with_backup "kitty" ~/.config/kitty ~/dotfiles/kitty
 create_symlink_with_backup "nano" ~/.config/nano ~/dotfiles/nano
 # oh-my-zsh
 create_symlink_with_backup "oh-my-zsh" ~/.zshrc ~/dotfiles/zsh/zshrc
-# hyprland
-# create_symlink_with_backup "hyprland" ~/.config/hypr ~/dotfiles/hypr
-# wlogout
-# create_symlink_with_backup "wlogout" ~/.config/wlogout ~/dotfiles/wlogout
 
 #########################
 # root stuff
@@ -76,8 +72,3 @@ create_symlink_with_backup "oh-my-zsh" ~/.zshrc ~/dotfiles/zsh/zshrc
 
 # nanorc
 copy_as_root "nanorc" ~/dotfiles/nano/nanorc /root/.config/nano/nanorc
-
-# sddm theme
-# copy_as_root "earth SSDM theme" ~/dotfiles/sddm/themes/earth /usr/share/sddm/themes/earth
-# sudo mkdir -p /etc/sddm.conf.d
-# copy_as_root "SSDM config" ~/dotfiles/sddm/sddm.conf /etc/sddm.conf.d/sddm.conf

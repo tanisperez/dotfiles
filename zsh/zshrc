@@ -28,6 +28,7 @@ alias ll='ls -lh'
 alias la='ls -lah'
 alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 alias zed='/usr/bin/zeditor'
+alias ssh='TERM=xterm-256color ssh'
 
 # -----------------------------------------------------
 # oh-myzsh themes: https://github.com/ohmyzsh/ohmyzsh/wiki/Themes

@@ -25,7 +25,6 @@ export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent.socket
 # -----------------------------------------------------
 alias ll='ls -lh'
 alias la='ls -lah'
-alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 alias zed='/usr/bin/zeditor'
 alias ssh='TERM=xterm-256color ssh'
 

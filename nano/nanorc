@@ -7,3 +7,22 @@ set linenumbers
 
 set titlecolor white
 set numbercolor white
+
+set nohelp
+
+bind ^c copy            main
+bind ^d cut             main
+bind ^v paste           main
+
+bind ^f whereis         main
+bind F3 findnext        main
+bind M-f findprevious   main
+bind ^r replace         main
+bind ^g gotoline        main
+
+bind ^y redo            main
+bind ^z undo            main
+
+bind M-f formatter      main
+
+bind ^x exit            main

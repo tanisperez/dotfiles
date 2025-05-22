@@ -65,6 +65,8 @@ create_symlink_with_backup "kitty" ~/.config/kitty ~/dotfiles/kitty
 create_symlink_with_backup "nano" ~/.config/nano ~/dotfiles/nano
 # oh-my-zsh
 create_symlink_with_backup "oh-my-zsh" ~/.zshrc ~/dotfiles/zsh/zshrc
+# brave
+create_symlink_with_backup "brave" ~/.config/brave-flags.conf ~/dotfiles/brave/brave-flags.conf
 
 #########################
 # root stuff

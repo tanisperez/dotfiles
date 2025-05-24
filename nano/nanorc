@@ -8,8 +8,6 @@ set linenumbers
 set titlecolor white
 set numbercolor white
 
-set nohelp
-
 bind ^c copy            main
 bind ^d cut             main
 bind ^v paste           main
@@ -24,5 +22,7 @@ bind ^y redo            main
 bind ^z undo            main
 
 bind M-f formatter      main
+
+bind ^s savefile        main
 
 bind ^x exit            main

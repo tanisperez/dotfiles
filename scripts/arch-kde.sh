@@ -6,7 +6,6 @@ sudo pacman -Syu
 packages=(
     git
     kitty
-    chromium
     power-profiles-daemon # Power profiles
     powerdevil # Power profiles integration in KDE
     man
@@ -15,7 +14,10 @@ packages=(
     htop
     btop
     nvtop
-    neofetch
+    s-tui
+    duf
+    ncu
+    fastfetch
     loupe            # Light image viewer
     fzf              # Fuzzy finder
     zed              # Zed text editor
@@ -40,6 +42,7 @@ makepkg -si
 
 yay_packages=(
     pinta       # Image editor
+    brave-bin
 )
 yay -S "${yay_packages[@]}"
 

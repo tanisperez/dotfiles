@@ -17,6 +17,7 @@ packages=(
     s-tui
     duf
     ncdu
+    procs
     fastfetch
     loupe            # Light image viewer
     fzf              # Fuzzy finder

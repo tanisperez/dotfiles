@@ -16,7 +16,7 @@ packages=(
     nvtop
     s-tui
     duf
-    ncu
+    ncdu
     fastfetch
     loupe            # Light image viewer
     fzf              # Fuzzy finder

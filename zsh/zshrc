@@ -32,6 +32,7 @@ alias java25='sdk use java 25-zulu'
 alias java21='sdk use java 21.0.8-zulu'
 alias java17='sdk use java 17.0.16-zulu'
 alias java11='sdk use java 11.0.28-zulu'
+alias java8='sdk use java 8.0.462-zulu'
 
 # -----------------------------------------------------
 # Functions

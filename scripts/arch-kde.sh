@@ -23,6 +23,7 @@ packages=(
     fzf              # Fuzzy finder
     zed              # Zed text editor
     vlc
+    vlc-plugins-all
     transmission-qt  # Torrent client
     zsh
     zsh-autosuggestions

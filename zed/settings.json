@@ -7,33 +7,32 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+    "minimap": {
+        "show": "always",
+    },
+    "disable_ai": true,
     "telemetry": {
         "metrics": false,
         "diagnostics": false
     },
+    "base_keymap": "JetBrains",
+    "icon_theme": "Zed (Default)",
     "ui_font_size": 16,
     "buffer_font_size": 16,
     "theme": {
-        "mode": "system",
+        "mode": "dark",
         "light": "One Dark",
-        "dark": "Github Dark Dimmed"
-    },
-    "features": {
-        "copilot": false
+        "dark": "VSCode Dark Modern"
     },
     "collaboration_panel": {
         "button": false
     },
-    "chat_panel": {
-        "button": "never"
-    },
     "notification_panel": {
         "button": false
     },
-    "assistant": {
+    "agent": {
         "enabled": false,
-        "button": false,
-        "version": "2"
+        "button": false
     },
     "preview_tabs": {
         "enabled": false
@@ -56,14 +55,21 @@
         "quick_actions": false
     },
     "project_panel": {
+        "dock": "left",
         "default_width": 240,
         "indent_size": 24
     },
     "languages": {
         "JSONC": {
-            "format_on_save": "language_server",
+            "formatter": "language_server",
+            "format_on_save": "on",
             "tab_size": 4,
             "soft_wrap": "preferred_line_length"
+        },
+        "XML": {
+            "format_on_save": "on",
+            "tab_size": 4,
+            "soft_wrap": "none"
         }
     }
 }

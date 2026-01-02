@@ -55,6 +55,8 @@ copy_as_root() {
     fi
 }
 
+# kde
+create_symlink_with_backup "KDE" ~/.config/kglobalshortcutsrc ~/dotfiles/kde/kglobalshortcutsrc
 # ssh
 create_symlink_with_backup "ssh" ~/.ssh/config ~/dotfiles/ssh/config
 # zed

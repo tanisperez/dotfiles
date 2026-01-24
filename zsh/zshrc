@@ -44,6 +44,10 @@ idea() {
 clion() {
   nohup /opt/clion/bin/clion "$@" >/dev/null 2>&1 &
 }
+
+open() {
+  dolphin "$@" &
+}
 # -----------------------------------------------------
 # oh-myzsh themes: https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 # -----------------------------------------------------

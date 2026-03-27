@@ -1,5 +1,6 @@
 [ActivityManager]
 _k_friendly_name=Gestor de actividades
+switch-to-activity-9b7c1c3b-e617-49a6-bdb2-545cea03eeed=none,none,Cambiar a la actividad «Por omisión»
 switch-to-activity-f4d30080-e860-4a3e-a33f-4c8341f2a81a=none,none,Cambiar a la actividad «Por omisión»
 
 [KDE Keyboard Layout Switcher]
@@ -24,14 +25,14 @@ mute=Volume Mute,Volume Mute,Silenciar
 
 [ksmserver]
 Halt Without Confirmation=none,,Apagar sin confirmación
-Lock Session=Meta+L\tScreensaver,Meta+L\tScreensaver,Bloquear la sesión
+Lock Session=Meta+L\tScreensaver,Meta+L\tScreensaver,Lock Session
 Log Out=Ctrl+Alt+Del,Ctrl+Alt+Del,Mostrar pantalla de cierre de sesión
 Log Out Without Confirmation=none,,Cerrar sesión sin confirmación
 LogOut=none,,Cerrar sesión
 Reboot=none,,Reiniciar
 Reboot Without Confirmation=none,,Reiniciar sin confirmación
 Shut Down=none,,Apagar
-_k_friendly_name=Gestión de la sesión
+_k_friendly_name=Session Management
 
 [kwin]
 Activate Window Demanding Attention=Meta+Ctrl+A,Meta+Ctrl+A,Activar la ventana que necesite atención

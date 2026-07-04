@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cat:*)",
+      "Bash(ls:*)",
+      "Bash(find:*)",
+      "Bash(grep:*)",
+      "Bash(head:*)",
+      "Bash(tail:*)",
+      "Bash(wc:*)",
+      "Bash(npm:*)",
+      "Bash(npx:*)",
+      "Read(/home/tanis/dev/doc/*)",
+      "Write(/home/tanis/dev/doc/*)",
+      "Bash(mkdir:/home/tanis/dev/doc*)",
+      "Bash(ls:/home/tanis/dev/doc*)",
+      "Bash(git commit *)",
+      "Read(/home/tanis/dev/seqix/*)",
+      "Read(/home/tanis/dev/chess-counter/*)"
+    ]
+  },
+  "model": "opus",
+  "theme": "dark"
+}

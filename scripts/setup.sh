@@ -69,6 +69,10 @@ create_symlink_with_backup "nano" ~/.config/nano ~/dotfiles/nano
 create_symlink_with_backup "oh-my-zsh" ~/.zshrc ~/dotfiles/zsh/zshrc
 # brave
 create_symlink_with_backup "brave" ~/.config/brave-flags.conf ~/dotfiles/brave/brave-flags.conf
+# claude
+create_symlink_with_backup "CLAUDE.md" ~/.claude/CLAUDE.md ~/dotfiles/claude/CLAUDE.md
+create_symlink_with_backup "claude settings" ~/.claude/settings.json ~/dotfiles/claude/settings.json
+create_symlink_with_backup "claude expo rules" ~/.claude/expo ~/dotfiles/claude/expo
 
 #########################
 # root stuff

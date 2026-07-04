@@ -81,6 +81,15 @@ everything, driven by `@media` queries — not separate layouts.
   already wraps the app in a `SafeAreaProvider`.
 - This is **not** a violation of "no JS-computed sizing" — clearing the status bar / Dynamic Island
   / notch is an OS-level device-chrome measurement with no CSS/`@media` equivalent on native.
+- **Inside a `presentation: 'modal'` screen, do NOT add `insets.top` blindly.** iOS presents the
+  modal as a *page sheet* whose card already starts **below** the status bar, yet
+  `useSafeAreaInsets()` still returns the **full-screen** `insets.top` (~44–59px). Adding it there
+  double-pads and leaves a huge gap above the header. Android draws the modal edge-to-edge, so there
+  `insets.top` **is** needed. Gate the **top** inset to Android in modals:
+  ```ts
+  paddingTop: (Platform.OS === 'android' ? insets.top : 0) + BASE
+  ```
+  `insets.bottom` **is** legitimate on both platforms inside the sheet (home indicator), so keep it.
 
 ## 5. i18n (mandatory)
 
@@ -112,6 +121,15 @@ everything, driven by `@media` queries — not separate layouts.
   (pressed) state too.
 - Hover/active styling is web-only CSS in `+html.tsx` on the button's `#id` (applied before JS →
   no flash). Native gets its press feedback from the `Pressable`/touchable itself.
+- **Native-first form controls, themed web fallback.** For interactive controls (selects, pickers,
+  date/time inputs…), prefer the **platform-native control on iOS/Android** — it inherits the OS
+  affordances, wheels/sheets, accessibility and dark mode for free — and use the **native web
+  control (`<select>`, `<input>`) styled with CSS** on web (RNW can't reach a form control's chrome
+  via style props, so theme it via `#id` in `+html.tsx`). **Don't hand-roll a cross-platform widget
+  out of `Pressable`s** to fake one control everywhere: it drifts from each platform's conventions
+  and loses native behaviour. Pattern: `LanguagePicker` (seqix) — web `<select>` (`#lang-select`
+  CSS), Android inline dropdown, iOS row → bottom-sheet wheel. Same idea as the `.web.ts` split in
+  §2: one component, per-platform implementation.
 
 ## 8. Code style
 

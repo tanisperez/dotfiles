@@ -115,10 +115,11 @@ everything, driven by `@media` queries — not separate layouts.
   (pointing at fonts under `public/`). Without the static injection, iOS/Safari renders empty boxes
   because `expo-font`'s runtime injection lands too late.
 
-## 7. Buttons & interactivity
+## 7. Buttons & interactivity (mandatory)
 
-- **Every button has a `:hover` effect (web) and an `onPress`/onClick handler.** Add an `:active`
-  (pressed) state too.
+- **No exceptions: every button/pressable in the app ALWAYS has both an `onPress`/onClick handler
+  AND a `:hover` effect on web.** Add an `:active` (pressed) state too. A button that does nothing on
+  hover (web) or has no press handler is a bug, not a style choice — treat it as incomplete.
 - Hover/active styling is web-only CSS in `+html.tsx` on the button's `#id` (applied before JS →
   no flash). Native gets its press feedback from the `Pressable`/touchable itself.
 - **Native-first form controls, themed web fallback.** For interactive controls (selects, pickers,

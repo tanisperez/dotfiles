@@ -27,6 +27,8 @@ cost=$(echo "$input" | jq -r '.cost.total_cost_usd // 0')
 lines_add=$(echo "$input" | jq -r '.cost.total_lines_added // 0')
 lines_del=$(echo "$input" | jq -r '.cost.total_lines_removed // 0')
 cwd=$(echo "$input" | jq -r '.workspace.current_dir // .cwd // ""')
+tokens=$(echo "$input" | jq -r '(.context_window.current_usage // {}) | ((.input_tokens//0)+(.output_tokens//0)+(.cache_creation_input_tokens//0)+(.cache_read_input_tokens//0))')
+tokens_fmt=$(awk -v t="${tokens:-0}" 'BEGIN{ if(t>=1000) printf "%.1fk", t/1000; else printf "%d", t }')
 
 # ── Git info ──
 branch=""
@@ -72,9 +74,9 @@ if [ -n "$used" ]; then
   elif [ "$used_int" -ge 70 ]; then pct_color="$YELLOW"
   else pct_color="$GREEN"; fi
 
-  ctx_part="⚡ ${bar} ${pct_color}${used_int}%${RESET}"
+  ctx_part="⚡${pct_color} ${tokens_fmt} ${bar} ${used_int}%${RESET}"
 else
-  ctx_part="⚡ \033[38;2;60;60;60m░░░░░░░░░░░░░░░░░░░░${RESET} --%"
+  ctx_part="⚡${BRGREEN} ${tokens_fmt} \033[38;2;60;60;60m░░░░░░░░░░░░░░░░░░░░${RESET} --%"
 fi
 
 # ── Cost ──

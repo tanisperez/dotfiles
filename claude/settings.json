@@ -20,10 +20,10 @@
     ]
   },
   "model": "sonnet",
-  "theme": "dark",
-  "agentPushNotifEnabled": true,
   "statusLine": {
     "type": "command",
     "command": "/home/tanis/dotfiles/claude/statusline.sh"
-  }
+  },
+  "theme": "dark",
+  "agentPushNotifEnabled": true
 }

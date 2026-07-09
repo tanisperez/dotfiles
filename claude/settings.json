@@ -19,7 +19,11 @@
       "Read(/home/tanis/dev/chess-counter/*)"
     ]
   },
-  "model": "claude-fable-5[1m]",
+  "model": "sonnet",
   "theme": "dark",
-  "agentPushNotifEnabled": true
+  "agentPushNotifEnabled": true,
+  "statusLine": {
+    "type": "command",
+    "command": "/home/tanis/dotfiles/claude/statusline.sh"
+  }
 }

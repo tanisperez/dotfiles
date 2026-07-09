@@ -73,6 +73,7 @@ create_symlink_with_backup "brave" ~/.config/brave-flags.conf ~/dotfiles/brave/b
 create_symlink_with_backup "CLAUDE.md" ~/.claude/CLAUDE.md ~/dotfiles/claude/CLAUDE.md
 create_symlink_with_backup "claude settings" ~/.claude/settings.json ~/dotfiles/claude/settings.json
 create_symlink_with_backup "claude expo rules" ~/.claude/expo ~/dotfiles/claude/expo
+create_symlink_with_backup "claude agents" ~/.claude/agents ~/dotfiles/claude/agents
 
 #########################
 # root stuff

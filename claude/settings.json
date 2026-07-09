@@ -10,19 +10,19 @@
       "Bash(wc:*)",
       "Bash(npm:*)",
       "Bash(npx:*)",
-      "Read(/home/tanis/dev/doc/*)",
-      "Write(/home/tanis/dev/doc/*)",
-      "Bash(mkdir:/home/tanis/dev/doc*)",
-      "Bash(ls:/home/tanis/dev/doc*)",
+      "Read(~/dev/doc/*)",
+      "Write(~/dev/doc/*)",
+      "Bash(mkdir:~/dev/doc*)",
+      "Bash(ls:~/dev/doc*)",
       "Bash(git commit *)",
-      "Read(/home/tanis/dev/seqix/*)",
-      "Read(/home/tanis/dev/chess-counter/*)"
+      "Read(~/dev/seqix/*)",
+      "Read(~/dev/chess-counter/*)"
     ]
   },
   "model": "sonnet",
   "statusLine": {
     "type": "command",
-    "command": "/home/tanis/dotfiles/claude/statusline.sh"
+    "command": "~/dotfiles/claude/statusline.sh"
   },
   "theme": "dark",
   "agentPushNotifEnabled": true

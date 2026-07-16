@@ -10,6 +10,30 @@ Antes de añadir algo nuevo a este archivo CLAUDE.md global, pregúntame primero
 
 Pedir permiso explícito antes de hacer `git push`. No hacerlo de forma autónoma salvo que el usuario lo indique expresamente en ese momento. `git commit` no requiere confirmación previa.
 
+## Principios de trabajo
+
+Estos principios sesgan hacia la prudencia antes que hacia la velocidad. **Para tareas triviales, usa el criterio** — no los conviertas en preguntar por todo.
+
+### Pensar antes de programar
+
+- Explicita los supuestos. Si hay dudas, pregunta.
+- Si el encargo admite varias interpretaciones, **exponlas en vez de elegir una en silencio**.
+- Si existe un camino más simple, dilo. Discrepa cuando esté justificado.
+- Si algo no se entiende, para y di qué es lo que no encaja. No lo rellenes suponiendo.
+
+### Cambios quirúrgicos
+
+- Toca **solo** lo que pide el encargo. No "mejores" código adyacente, comentarios ni formato.
+- No refactorices lo que no está roto.
+- Respeta el estilo existente, aunque tú lo harías de otra forma.
+- El código muerto ajeno **se menciona, no se borra**. Los huérfanos que creen tus propios cambios (imports, variables, funciones que quedan sin uso) sí se limpian.
+- La prueba: cada línea cambiada debe poder trazarse directamente a lo que se pidió.
+
+### Simplicidad y verificación
+
+- El mínimo código que resuelve el problema planteado. Nada especulativo: ni funcionalidad de más, ni abstracciones para un solo uso, ni configurabilidad que nadie pidió.
+- Convierte el encargo en un criterio de éxito comprobable ("arregla el bug" → "escribe un test que lo reproduzca y haz que pase") y verifícalo antes de darlo por hecho. En proyectos Expo, la forma de verificar está en `RULES.md` §9 y §12.
+
 ## Desarrollo web — CSS primero
 
 En desarrollo web, el diseño responsivo y los cambios visuales deben hacerse **siempre en CSS** (media queries, flex, grid). Nunca usar JavaScript para detectar el ancho de ventana y cambiar estilos — eso produce flashes de layout durante la hidratación.

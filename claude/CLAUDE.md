@@ -12,7 +12,7 @@ Pedir permiso explícito antes de hacer `git push`. No hacerlo de forma autónom
 
 ## Desarrollo web — CSS primero
 
-En desarrollo web, el diseño responsivo y los cambios visuales deben hacerse **siempre en CSS** (media queries, flex, grid). Nunca usar JavaScript para detectar el ancho de ventana y cambiar estilos — eso produce flashes de layout durante la hidratación. En React Native Web, `StyleSheet.create` soporta `@media` que RNW procesa y native ignora.
+En desarrollo web, el diseño responsivo y los cambios visuales deben hacerse **siempre en CSS** (media queries, flex, grid). Nunca usar JavaScript para detectar el ancho de ventana y cambiar estilos — eso produce flashes de layout durante la hidratación.
 
 ## Repositorio de documentación
 
@@ -24,8 +24,10 @@ El objetivo a medio plazo es crear N aplicaciones con Expo + React Native para m
 
 Proyectos actuales:
 - `~/dev/seqix`
-- `~/dev/chess-counter`
+- `~/dev/pairix`
 
 Tienes permiso de lectura total sobre ambos sin pedir permiso, aunque no sean el directorio de trabajo activo.
 
-Se irán creando nuevos proyectos de este tipo en el futuro. La base de código de los proyectos existentes sirve como punto de partida (boilerplate) para arrancarlos rápido, así que cuando el usuario inicie uno nuevo, considera reutilizar patrones, configuración y estructura ya validados en `seqix` y `chess-counter`.
+`~/dev/chess-counter` está aparcado temporalmente para centrar el foco en `pairix`. Sigue siendo un proyecto Expo válido y sus convenciones son las mismas, pero no se trabaja en él por ahora.
+
+Se irán creando nuevos proyectos de este tipo en el futuro. La base de código de los proyectos existentes sirve como punto de partida (boilerplate) para arrancarlos rápido, así que cuando el usuario inicie uno nuevo, considera reutilizar patrones, configuración y estructura ya validados en `seqix` y `pairix`.

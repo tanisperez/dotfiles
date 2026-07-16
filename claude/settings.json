@@ -16,10 +16,11 @@
       "Bash(ls:~/dev/doc*)",
       "Bash(git commit *)",
       "Read(~/dev/seqix/*)",
+      "Read(~/dev/pairix/*)",
       "Read(~/dev/chess-counter/*)"
     ]
   },
-  "model": "sonnet",
+  "model": "opus",
   "statusLine": {
     "type": "command",
     "command": "~/dotfiles/claude/statusline.sh"

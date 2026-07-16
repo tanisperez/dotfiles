@@ -1,9 +1,9 @@
 # Expo + React Native — Shared Working Rules
 
 Single source of truth for how we build **every** Expo + React Native app in this workspace
-(`~/dev/seqix`, `~/dev/chess-counter`, and every future app). Each project's `CLAUDE.md` imports
-this file with `@~/dev/expo/RULES.md`, so app-specific `CLAUDE.md` files only need to describe what
-is unique to that app — everything general lives here.
+(`~/dev/seqix`, `~/dev/pairix`, and every future app). Each project's `CLAUDE.md` imports
+this file with `@~/.claude/expo/RULES.md`, so app-specific `CLAUDE.md` files only need to describe
+what is unique to that app — everything general lives here.
 
 **When a rule below is genuinely app-specific in practice, the app's own `CLAUDE.md` overrides it.**
 Otherwise, treat these as binding defaults.
@@ -231,6 +231,4 @@ it in that turn:
 - **Keep `README.md` in sync** whenever a change affects how a developer builds, runs, tests, or
   ships the app (a new Makefile target, a new required local tool, a language-table change, a change
   to what `make screenshots` covers). Not every commit — but anything on that scale.
-- **`git commit` is fine without asking; ask before `git push`** — never push autonomously unless
-  told to in that turn.
 - End commit messages with the `Co-Authored-By: Claude ...` trailer.

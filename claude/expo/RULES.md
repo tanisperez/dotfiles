@@ -90,6 +90,11 @@ everything, driven by `@media` queries — not separate layouts.
   paddingTop: (Platform.OS === 'android' ? insets.top : 0) + BASE
   ```
   `insets.bottom` **is** legitimate on both platforms inside the sheet (home indicator), so keep it.
+- **The inset IS the margin — don't stack a decorative constant on top of it.** `insets.top`
+  already measures the status bar / notch / Dynamic Island. Adding another 24–36px on top leaves
+  the first element floating far below the device chrome; it reads as a layout mistake, not as
+  breathing room. Add at most ~8px, and only when the element needs to clear a neighbouring
+  control. The same applies to `insets.bottom` and the home indicator.
 
 ## 5. i18n (mandatory)
 

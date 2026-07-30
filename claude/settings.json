@@ -20,12 +20,13 @@
       "Read(~/dev/chess-counter/*)"
     ]
   },
+  "model": "claude-sonnet-4-6",
   "availableModels": [
     "claude-opus-4-8",
+    "claude-sonnet",
     "claude-sonnet-4-6",
     "claude-haiku-4-5"
   ],
-  "model": "claude-sonnet-4-6",
   "statusLine": {
     "type": "command",
     "command": "~/dotfiles/claude/statusline.sh"

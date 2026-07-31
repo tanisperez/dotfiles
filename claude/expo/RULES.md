@@ -106,6 +106,16 @@ everything, driven by `@media` queries — not separate layouts.
 - **Always use `useStrings()` in components** — the static `t` won't react to a language change.
 - **Keep the language table in the app's `CLAUDE.md` and `README.md` in sync** whenever you add or
   remove a language (one entry in `translations.ts`, one in `LANGUAGES`, update both tables).
+- **Declare `CFBundleLocalizations` en `app.json → ios.infoPlist`** con todos los códigos de idioma
+  soportados. El App Store lee los idiomas del bundle nativo (carpetas `.lproj`), no del código JS.
+  Como la i18n es puramente JS, sin `CFBundleLocalizations` la sección "Idiomas" del App Store solo
+  muestra `en` aunque la app soporte 9 lenguas. Actualiza este array cada vez que añadas o elimines
+  un idioma:
+  ```json
+  "infoPlist": {
+      "CFBundleLocalizations": ["es", "en", "fr", "de", "pt", "ja", "zh", "ko", "ru"]
+  }
+  ```
 
 ## 6. Icons & assets (SVG-first)
 

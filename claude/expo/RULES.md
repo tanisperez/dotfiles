@@ -247,3 +247,19 @@ it in that turn:
   ships the app (a new Makefile target, a new required local tool, a language-table change, a change
   to what `make screenshots` covers). Not every commit — but anything on that scale.
 - End commit messages with the `Co-Authored-By: Claude ...` trailer.
+
+## 14. Store listing text — never mention the sibling platform
+
+- **Never write "available on Android/iOS" (or any reference to the other platform) inside any
+  App Store Connect field** (`description`, `whats_new`/release notes, `subtitle`, `keywords`).
+  This happened for real on Foliato 1.0.0: the ASO doc's `full_description` ended with a sentence
+  like "disponible en Android e iOS" / "available on Android and iOS", written once to feed both
+  App Store Connect and Google Play Console — pasting it verbatim into the iOS listing got that
+  version rejected.
+- These ASO docs are typically **one shared file feeding both stores** (see e.g. Foliato's
+  `doc/store-listing.md`). When drafting the "available in N languages, light/dark mode, …" style
+  closing sentence, keep it **platform-agnostic** — drop the "on Android and iOS" clause entirely
+  rather than writing one sentence for both stores. Play doesn't reject for mentioning iOS, but
+  keeping the copy identical across stores avoids re-introducing the Apple-unsafe version later.
+- Applies to every future app in this workspace, not just Foliato — check any shared store-listing
+  doc for this pattern before submitting a new app's first listing or an update.

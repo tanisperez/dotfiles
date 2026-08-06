@@ -20,8 +20,9 @@
       "Read(~/dev/chess-counter/*)"
     ]
   },
-  "model": "claude-sonnet-4-6",
+  "model": "sonnet",
   "availableModels": [
+    "claude-opus",
     "claude-opus-4-8",
     "claude-sonnet",
     "claude-sonnet-4-6",

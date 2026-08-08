@@ -10,6 +10,8 @@ Antes de añadir algo nuevo a este archivo CLAUDE.md global, pregúntame primero
 
 Pedir permiso explícito antes de hacer `git push`. No hacerlo de forma autónoma salvo que el usuario lo indique expresamente en ese momento. `git commit` no requiere confirmación previa.
 
+Los mensajes de commit se escriben siempre en inglés, independientemente del idioma de la conversación — es contexto técnico, como el código o los mensajes de error (ver regla de Idioma).
+
 ## Principios de trabajo
 
 Estos principios sesgan hacia la prudencia antes que hacia la velocidad. **Para tareas triviales, usa el criterio** — no los conviertas en preguntar por todo.

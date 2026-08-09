@@ -32,6 +32,7 @@
     "type": "command",
     "command": "~/dotfiles/claude/statusline.sh"
   },
+  "effortLevel": "high",
   "theme": "dark",
   "agentPushNotifEnabled": true
 }

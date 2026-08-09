@@ -74,6 +74,7 @@ create_symlink_with_backup "CLAUDE.md" ~/.claude/CLAUDE.md ~/dotfiles/claude/CLA
 create_symlink_with_backup "claude settings" ~/.claude/settings.json ~/dotfiles/claude/settings.json
 create_symlink_with_backup "claude expo rules" ~/.claude/expo ~/dotfiles/claude/expo
 create_symlink_with_backup "claude agents" ~/.claude/agents ~/dotfiles/claude/agents
+create_symlink_with_backup "claude skills" ~/.claude/skills ~/dotfiles/claude/skills
 
 #########################
 # root stuff

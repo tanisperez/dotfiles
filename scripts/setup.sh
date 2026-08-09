@@ -75,6 +75,9 @@ create_symlink_with_backup "claude settings" ~/.claude/settings.json ~/dotfiles/
 create_symlink_with_backup "claude expo rules" ~/.claude/expo ~/dotfiles/claude/expo
 create_symlink_with_backup "claude agents" ~/.claude/agents ~/dotfiles/claude/agents
 create_symlink_with_backup "claude skills" ~/.claude/skills ~/dotfiles/claude/skills
+# opencode
+create_symlink_with_backup "opencode config" ~/.config/opencode/opencode.json ~/dotfiles/opencode/opencode.json
+create_symlink_with_backup "opencode agents" ~/.config/opencode/agents ~/dotfiles/opencode/agents
 
 #########################
 # root stuff

@@ -277,10 +277,6 @@ _launch=none
 [services][org.kde.krunner.desktop]
 _launch=Search\tAlt+Space\tAlt+F2\tMeta+Space
 
-[services][org.kde.spectacle.desktop]
-CurrentMonitorScreenShot=none
-OpenWithoutScreenshot=none
-
 [wacomtablet]
 Map to fullscreen=Meta+Ctrl+F,Meta+Ctrl+F,Correspondencia con pantalla completa
 Map to screen 1=Meta+Ctrl+1,Meta+Ctrl+1,Correspondencia con la pantalla 1

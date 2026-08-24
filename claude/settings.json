@@ -19,7 +19,7 @@
       "Read(~/dev/chess-counter/*)"
     ]
   },
-  "model": "sonnet",
+  "model": "opus",
   "availableModels": [
     "claude-opus",
     "claude-opus-4-8",
@@ -31,9 +31,9 @@
     "type": "command",
     "command": "~/dotfiles/claude/statusline.sh"
   },
+  "outputStyle": "concise",
   "effortLevel": "high",
   "theme": "dark",
-  "outputStyle": "concise",
   "agentPushNotifEnabled": true,
   "autoMode": {
     "allow": [

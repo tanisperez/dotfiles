@@ -256,10 +256,27 @@ it in that turn:
   like "disponible en Android e iOS" / "available on Android and iOS", written once to feed both
   App Store Connect and Google Play Console — pasting it verbatim into the iOS listing got that
   version rejected.
-- These ASO docs are typically **one shared file feeding both stores** (see e.g. Foliato's
-  `doc/store-listing.md`). When drafting the "available in N languages, light/dark mode, …" style
-  closing sentence, keep it **platform-agnostic** — drop the "on Android and iOS" clause entirely
-  rather than writing one sentence for both stores. Play doesn't reject for mentioning iOS, but
-  keeping the copy identical across stores avoids re-introducing the Apple-unsafe version later.
-- Applies to every future app in this workspace, not just Foliato — check any shared store-listing
-  doc for this pattern before submitting a new app's first listing or an update.
+- Even split across the two per-store files §15 describes, when drafting the "available in N
+  languages, light/dark mode, …" style closing sentence, keep it **platform-agnostic** — drop the
+  "on Android and iOS" clause entirely rather than writing one sentence for both stores. Play
+  doesn't reject for mentioning iOS, but keeping the copy identical across stores avoids
+  re-introducing the Apple-unsafe version later.
+- Applies to every future app in this workspace, not just Foliato — check any store-listing doc
+  for this pattern before submitting a new app's first listing or an update.
+
+## 15. Store listing docs — one file per store, not one shared file
+
+- Keep ASO copy in **two separate files**, `doc/store-listing-app-store.md` and
+  `doc/store-listing-google-play.md`, instead of a single combined doc. Each file holds only the
+  fields that console actually has (App Store's `keywords`/`subtitle`/`promotional_text` don't
+  exist in Play; Play's `short_description`/`full_description` aren't App Store fields), in that
+  console's own field order, so copying a field into App Store Connect or Play Console is a direct
+  copy-paste from the matching file with no risk of grabbing the wrong store's text or a field
+  that store doesn't have.
+- Originated on Foliato at the 1.1.0 listing update (splitting what had been a single
+  `doc/store-listing.md`) — apply the same split to every app in this workspace, including new
+  ones started from this boilerplate.
+- Shared material that isn't a per-field copy block (the "where does each field go" operational
+  notes, the keyword research writeup, the §14 platform-mention rule above) can stay in whichever
+  of the two files makes more sense, or get its own third doc, per app's judgment — the two-file
+  split is about the copy-paste blocks, not a ban on any shared prose.

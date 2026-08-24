@@ -9,7 +9,6 @@
       "Bash(tail:*)",
       "Bash(wc:*)",
       "Bash(npm:*)",
-      "Bash(npx:*)",
       "Read(~/dev/doc/*)",
       "Edit(~/dev/doc/*)",
       "Bash(mkdir:~/dev/doc*)",
@@ -34,5 +33,40 @@
   },
   "effortLevel": "high",
   "theme": "dark",
-  "agentPushNotifEnabled": true
+  "outputStyle": "concise",
+  "agentPushNotifEnabled": true,
+  "autoMode": {
+    "allow": [
+      "$defaults",
+      "Bash(npx expo:*) in /home/tanis/dev/foliato",
+      "Bash(make dev-client) in /home/tanis/dev/foliato",
+      "Bash(adb:*) in /home/tanis/dev/foliato"
+    ],
+    "environment": [
+      "### Org-wide",
+      "**Organization**: None configured",
+      "**Cloud provider(s)**: None configured",
+      "**Repository visibility**: assume private unless the remote host and repo name indicate otherwise, or a visibility check in the transcript shows public (gh visibility check was not queryable here)",
+      "**Internal sharing / snippet hosting**: None configured — treat public paste/gist services as outside the trust boundary",
+      "**Secrets management**: None configured",
+      "**Default / protected branches**: main (default branch, per repo facts); protection status not queryable here via gh — treat as potentially protected and avoid force-push/history-rewrite on it",
+      "**CI/CD deploy targets**: None configured",
+      "**Network posture**: None configured",
+      "**Source control**: The trusted repo (github.com:tanisperez/foliato.git) and its remote(s) only — no additional orgs configured",
+      "**Trusted internal domains**: None configured",
+      "**Trusted cloud buckets**: None configured",
+      "**Key internal services**: None configured",
+      "**Internal package registry**: None configured",
+      "**Sensitive data locations & audiences**: any file or store holding personal data, confidential business data, credentials, regulated data, or similarly sensitive material; preserve exact handles when known and share only with audiences cleared at the [named+specifics] bar. Note: this app's product design is 100% on-device PDF processing — nothing is ever uploaded — so any code change that introduces network upload of user PDFs is a significant deviation from stated intent, not just a sensitivity concern",
+      "**Data retention / declassification**: None configured",
+      "**Sensitive remote targets**: any namespace, host, or container whose name carries `prod` or `production` as a whole word or name segment (hyphen/underscore/dot-delimited)",
+      "**Protected deployment namespaces / environments**: None configured — fall back to the Sensitive remote targets heuristic",
+      "**Protected IaC scopes**: IAM, RBAC, networking, quota, and node-pool resources; anything whose name or tag carries `prod` or `production` as a whole word or name segment",
+      "### User-specific",
+      "**Primary use of Claude Code**: software development (Expo/React Native mobile app development, per CLAUDE.md and repo structure)",
+      "**Trusted repo**: /home/tanis/dev/foliato (working directory) and its remote github.com:tanisperez/foliato.git — visibility not confirmed by gh in this run, so treat as private-by-default per shipped heuristic; do not publish content there that isn't this repo's own work",
+      "**Org-specific CLIs**: None configured",
+      "routine under /home/tanis/dev/foliato/ prefix: npx (Expo/EAS tooling, 67× in-project usage), make (Makefile targets: dev-client, android, icon, fonts, pdfjs, screenshots, etc.), adb (Android device debugging)"
+    ]
+  }
 }

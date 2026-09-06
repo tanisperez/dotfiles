@@ -280,3 +280,128 @@ it in that turn:
   notes, the keyword research writeup, the §14 platform-mention rule above) can stay in whichever
   of the two files makes more sense, or get its own third doc, per app's judgment — the two-file
   split is about the copy-paste blocks, not a ban on any shared prose.
+
+## 16. Migrating SDK 54 → 57 (done on Foliato, 2026-09-06)
+
+Foliato was the pilot. Everything below is what **actually happened**, not what the changelogs
+promised — several widely-cited breaking changes turned out not to apply, and several things that
+broke are in no changelog at all.
+
+**§1's SDK 54 pin is superseded for any app that wants Expo Go**: Expo Go now ships SDK 57. Apps
+with custom native config (Foliato's `withPdfDocumentTypes`) never had Expo Go parity anyway.
+
+### Target versions
+
+| Package | SDK 54 | SDK 57 |
+|---|---|---|
+| `expo` | ~54.0.x | **~57.0.20** (see the Hermes floor below) |
+| `react-native` | 0.81.x | 0.86.3 |
+| `react` / `react-dom` | 19.1.0 | 19.2.3 |
+| `expo-router` | ~6.0.x | **~57.0.19** — the package was renumbered to track the SDK; there is no 7.x on npm |
+| `eslint-config-expo` | ~10.0.0 | **~57.0.2** — renumbered too, no longer on the 10.x line |
+| `react-native-reanimated` / `react-native-worklets` | 4.1.x / 0.5.x | 4.5.1 / **0.10.1** |
+| `typescript` | ~5.9.x | **~6.0.3** (a major, but it caused zero errors on Foliato) |
+| `jest-expo` | ~54.0.0 | ~57.0.5 |
+| `react-native-web` / `async-storage` | 0.21 / 2.2.0 | **unchanged** |
+
+**Pin `expo` at ≥57.0.17.** SDK 56 made Hermes V1 the default engine and shipped a memory
+regression triggered *by importing `react-native-reanimated`* — fixed in 57.0.9, with a second
+startup regression fixed in 57.0.17. Every app here uses Reanimated.
+
+### What actually broke
+
+1. **`StyleSheet.absoluteFillObject` is gone** in RN 0.86 — removed from both the typings and the
+   runtime when the implementation moved to `StyleSheetExports.js`. `absoluteFill` is now a frozen
+   plain object, so `...StyleSheet.absoluteFill` is an exact drop-in for spreading.
+2. **`useColorScheme()` is no longer nullable and now returns `'unspecified'`** as a third value.
+   Any `useColorScheme() ?? undefined` stops narrowing and leaks `'unspecified'` into a
+   `'light' | 'dark'` parameter. Map it explicitly. This hits every app with a light/dark theme.
+3. **`eslint-config-expo@57` enables `react-hooks/set-state-in-effect`** (eslint-plugin-react-hooks
+   v6). It flags the extremely common "reset derived state when the input changes" effect — 13
+   sites in Foliato, all pre-existing and working. The fix is React's documented
+   *adjust-state-during-render* pattern: compare against a previous-value state in the render body,
+   and leave the effect holding only the external work (the async call, the timer, the parent
+   notification). Where nothing but the input wrote the state, delete the state and compute it
+   during render. **Budget real time for this** — it is a behavioural refactor, not a lint tweak,
+   and no amount of `tsc`/jest proves it did not regress a screen.
+4. **`react-native-worklets` 0.10 touches its native module at import time** (`loadUnpackers` on an
+   undefined module) and throws under jest. Anything that transitively imports Reanimated — for
+   Foliato, `react-native-sortables` — takes down the whole suite, even specs that only exercise
+   pure helpers. **Reanimated's own `mock.js` is not the workaround**: it re-imports the real index
+   and hits the identical chain. Stub the *importing library* instead, the same way icon sets are
+   already stubbed in `jest-setup.ts`.
+5. **`expo install --fix` appends new config plugins to the END of `app.json`'s `plugins` array**,
+   i.e. *after* the app's own `./plugins/*`. On Foliato it added `expo-font`, `expo-sharing` and
+   `expo-status-bar`. Plugin order is applied order — move local plugins back to last so they keep
+   overriding the generated native config.
+6. **Installing in steps leaves the dependency tree incoherent.** After `expo install expo@^57`
+   plus two `--fix` passes, `expo-modules-core` was nested under `node_modules/expo/` instead of
+   hoisted, and `jest-expo`'s `setup.js` does a bare `require('expo-modules-core')` — **all 50
+   suites failed with one root cause**. Finish with `rm -rf node_modules package-lock.json &&
+   npm install`; keeping the lockfile reproduces the bad layout, because lockfile v3 encodes it.
+
+### What did NOT break (don't pre-emptively "fix" these)
+
+- **`@expo/vector-icons`**: the v14→v15 glyph rename/codepoint churn is real, but if the app is
+  already on 15.x it is already absorbed. Check the installed version before planning work.
+- **Expo Router's decoupling from React Navigation** (SDK 56) is a no-op for app code that never
+  imported `@react-navigation/*` directly. Grep before reaching for the codemod.
+- **The iOS 16.4 minimum** (SDK 56) is already satisfied by any app pinning `deploymentTarget:
+  "16.4"` in `expo-build-properties`.
+- **New Architecture** was already the default in SDK 54; if the app never set `newArchEnabled:
+  false`, there is nothing to migrate.
+- **React Compiler** is still opt-in in 57. Keep `experiments.reactCompiler: true`.
+- **`expo-file-system/legacy`** still ships. What became fatal is the **root re-export**:
+  `readAsStringAsync` imported from `'expo-file-system'` now *throws at runtime*, not warns. The
+  explicit `/legacy` subpath is the supported path.
+- **Metro's package-exports workaround is still required.** `unstable_enablePackageExports = false`
+  was re-tested on 57 with the new `@expo/metro` layer and the failure reproduces verbatim:
+  `TypeError: Cannot destructure property '__extends' of 'tslib.default' as it is undefined`,
+  raised from the first module importing `pdf-lib`, killing the root render so the app never
+  paints. Do not remove it in any app that bundles pdf-lib for web.
+
+### Environment traps (cost more wall-clock than the SDK itself)
+
+- **A clean `npm install` bumps `playwright` through its caret range**, and the new version demands
+  a Chromium build that is not in `~/.cache/ms-playwright`. `make screenshots` dies with
+  "Executable doesn't exist" until `npx playwright install chromium` runs again. Nobody re-runs
+  `make install` after an SDK bump — do it deliberately.
+- **`scripts/screenshot-devices.js`'s warm-up `page.goto` inherits Playwright's 30s default.** On
+  slow hardware the first Metro compile after `--clear` exceeds it, and the sweep dies before
+  taking a single shot. **Always compile the bundle first** (`curl` the `entry.bundle` URL, which
+  has no timeout) and only then start the sweep.
+- **That script leaks the browser when it fails**: `main()` catches, sets `process.exitCode`, and
+  never calls `browser.close()`, so any failure becomes a process that lives forever at 0% CPU with
+  Chromium attached. Never wait on its PID unbounded — always bound the wait.
+
+### Always run `npm audit` after the upgrade
+
+The dependency churn re-baselines the advisory list. On Foliato it surfaced a **HIGH** in
+`pdfjs-dist` (GHSA-hq66-cqwq-w95j, arbitrary JS execution when opening a malicious PDF), fixed by
+a non-major bump. Do that as its **own commit**, never inside the SDK jump — a viewer library's
+internals are a separate axis of failure from the SDK.
+
+### Debt this migration leaves for the next SDK
+
+- `expo-file-system`'s `File.write()` is queued to become **async** (its changelog's "Unpublished"
+  section). Sync `file.write(bytes)` still works on 57.
+- `@expo/vector-icons` is announced for deprecation in favour of per-family
+  `@react-native-vector-icons/*`, with a codemod. Not forced in 57.
+- Android `predictiveBackGestureEnabled` and `Modal`'s `statusBarTranslucent` both deserve a
+  re-look now that edge-to-edge is mandatory — but neither is verifiable off-device.
+
+### Order of operations that worked
+
+1. Commit a green baseline and tag it. Record the exact test/suite counts — that number is the
+   success criterion, and "still compiles" is not one.
+2. `npx expo install expo@^57.0.17`, then `npx expo install --fix` until it reports nothing.
+3. `rm -rf node_modules package-lock.json && npm install` (see breakage 6).
+4. `npx expo-doctor@latest` — it passed 21/21 on Foliato even while jest was fully red, so treat it
+   as necessary, never sufficient.
+5. `tsc` → lint → jest, in that order. Commit here: this is a working SDK 57 without the lint
+   refactor, and it is the checkpoint worth bisecting back to.
+6. The `set-state-in-effect` refactor as its own commit.
+7. A single-device web sweep (§12's `SCREENSHOT_DEVICE=<one>`), never the full matrix.
+8. **A device pass is still mandatory.** Steps 1–7 prove it compiles, type-checks and renders on
+   web. They prove nothing about native: the new architecture, the Reanimated/worklets bump and any
+   WebView-hosted content are all invisible to them.

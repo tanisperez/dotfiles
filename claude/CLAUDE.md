@@ -12,6 +12,14 @@ Pedir permiso explícito antes de hacer `git push`. No hacerlo de forma autónom
 
 Los mensajes de commit se escriben siempre en inglés, independientemente del idioma de la conversación — es contexto técnico, como el código o los mensajes de error (ver regla de Idioma).
 
+## Flujo de releases (gh)
+
+Válido para cualquier proyecto, no solo los de Expo:
+
+- El trabajo de una versión se rastrea con un **milestone de GitHub** (`gh issue list --milestone X.Y.Z`), no con un documento aparte que haya que mantener sincronizado a mano.
+- Los items de trabajo van como **issues** asignadas a ese milestone. Se crean y actualizan de forma autónoma (`gh issue create` / `edit` / `close`) al ir encontrando trabajo — no hace falta pedir permiso cada vez, es parte normal del trabajo, igual que editar código.
+- Al publicar (el tag y el push siguen sujetos a la regla de pedir permiso explícito antes de `git push`, ver "Comportamiento"): crear el tag de la versión, empujarlo, y crear la release en GitHub (`gh release create <tag> --notes-file ...`) enlazada a ese tag, con descripción en **inglés** en Markdown — qué cambia y qué issues del milestone entraron.
+
 ## Principios de trabajo
 
 Estos principios sesgan hacia la prudencia antes que hacia la velocidad. **Para tareas triviales, usa el criterio** — no los conviertas en preguntar por todo.

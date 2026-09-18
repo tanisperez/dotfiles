@@ -12,6 +12,15 @@ Pedir permiso explícito antes de hacer `git push`. No hacerlo de forma autónom
 
 Los mensajes de commit se escriben siempre en inglés, independientemente del idioma de la conversación — es contexto técnico, como el código o los mensajes de error (ver regla de Idioma).
 
+Las tareas de GitHub (issues y pull requests: título, cuerpo, comentarios) se escriben siempre en inglés, por el mismo motivo — nunca en español, aunque la conversación sea en español.
+
+Al implementar una issue de GitHub que sea compleja (nueva funcionalidad, varios ficheros, cambios de arquitectura — no un fix trivial de una línea), trabajar siempre en una rama nueva, nunca directamente en `main`.
+
+**Nunca uses la raya '—' (em dash) en ningún texto que escribas**: ni en respuestas, ni en código,
+comentarios, documentación, commits, issues o pull requests. Es un signo que solo usan las IAs y
+los novelistas, no se usa en escritura normal. Sustitúyelo siempre por una coma o un punto, lo que
+mejor encaje en cada caso.
+
 ## Flujo de releases (gh)
 
 Válido para cualquier proyecto, no solo los de Expo:
@@ -59,9 +68,8 @@ El objetivo a medio plazo es crear N aplicaciones con Expo + React Native para m
 Proyectos actuales:
 - `~/dev/seqix`
 - `~/dev/pairix`
+- `~/dev/chess-counter`
 
-Tienes permiso de lectura total sobre ambos sin pedir permiso, aunque no sean el directorio de trabajo activo.
-
-`~/dev/chess-counter` está aparcado temporalmente para centrar el foco en `pairix`. Sigue siendo un proyecto Expo válido y sus convenciones son las mismas, pero no se trabaja en él por ahora.
+Tienes permiso de lectura total sobre los tres sin pedir permiso, aunque no sean el directorio de trabajo activo.
 
 Se irán creando nuevos proyectos de este tipo en el futuro. La base de código de los proyectos existentes sirve como punto de partida (boilerplate) para arrancarlos rápido, así que cuando el usuario inicie uno nuevo, considera reutilizar patrones, configuración y estructura ya validados en `seqix` y `pairix`.

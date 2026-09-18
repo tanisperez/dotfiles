@@ -226,11 +226,11 @@ stopmedia=Media Stop,Media Stop,Detener la reproducción multimedia
 [org_kde_powerdevil]
 Decrease Keyboard Brightness=Keyboard Brightness Down,Keyboard Brightness Down,Disminuir el brillo del teclado
 Decrease Screen Brightness=Monitor Brightness Down,Monitor Brightness Down,Disminuir el brillo de la pantalla
-Decrease Screen Brightness Small=Shift+Monitor Brightness Down,Shift+Monitor Brightness Down,Disminuir el brillo de la pantalla un 1 %
+Decrease Screen Brightness Small=Shift+Monitor Brightness Down,Shift+Monitor Brightness Down,Disminuir el brillo de la pantalla un 1 %
 Hibernate=Hibernate,Hibernate,Hibernar
 Increase Keyboard Brightness=Keyboard Brightness Up,Keyboard Brightness Up,Aumentar el brillo del teclado
 Increase Screen Brightness=Monitor Brightness Up,Monitor Brightness Up,Aumentar el brillo de la pantalla
-Increase Screen Brightness Small=Shift+Monitor Brightness Up,Shift+Monitor Brightness Up,Aumentar el brillo de la pantalla un 1 %
+Increase Screen Brightness Small=Shift+Monitor Brightness Up,Shift+Monitor Brightness Up,Aumentar el brillo de la pantalla un 1 %
 PowerDown=Power Down,Power Down,Apagado completo
 PowerOff=Power Off,Power Off,Apagar
 Sleep=Sleep,Sleep,Suspender
@@ -276,6 +276,10 @@ _launch=none
 
 [services][org.kde.krunner.desktop]
 _launch=Search\tAlt+Space\tAlt+F2\tMeta+Space
+
+[services][org.kde.spectacle.desktop]
+CurrentMonitorScreenShot=none
+OpenWithoutScreenshot=none
 
 [wacomtablet]
 Map to fullscreen=Meta+Ctrl+F,Meta+Ctrl+F,Correspondencia con pantalla completa

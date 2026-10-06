@@ -67,9 +67,8 @@ El objetivo a medio plazo es crear N aplicaciones con Expo + React Native para m
 
 Proyectos actuales:
 - `~/dev/seqix`
-- `~/dev/pairix`
 - `~/dev/chess-counter`
 
-Tienes permiso de lectura total sobre los tres sin pedir permiso, aunque no sean el directorio de trabajo activo.
+Tienes permiso de lectura total sobre los dos sin pedir permiso, aunque no sean el directorio de trabajo activo.
 
-Se irán creando nuevos proyectos de este tipo en el futuro. La base de código de los proyectos existentes sirve como punto de partida (boilerplate) para arrancarlos rápido, así que cuando el usuario inicie uno nuevo, considera reutilizar patrones, configuración y estructura ya validados en `seqix` y `pairix`.
+Se irán creando nuevos proyectos de este tipo en el futuro. La base de código de los proyectos existentes sirve como punto de partida (boilerplate) para arrancarlos rápido, así que cuando el usuario inicie uno nuevo, considera reutilizar patrones, configuración y estructura ya validados en `seqix`.

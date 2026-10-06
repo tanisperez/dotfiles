@@ -1,11 +1,11 @@
 # Expo + React Native — Shared Working Rules
 
 Single source of truth for how we build **every** Expo + React Native app in this workspace
-(`~/dev/seqix`, `~/dev/pairix`, and every future app). Each project's `CLAUDE.md` imports
-this file with `@~/.claude/expo/RULES.md`, so app-specific `CLAUDE.md` files only need to describe
+(`~/dev/seqix` and every future app). Each project's `AGENTS.md` (or `CLAUDE.md` in projects not yet
+migrated) imports this file with `@~/.claude/expo/RULES.md`, so app-specific files only need to describe
 what is unique to that app — everything general lives here.
 
-**When a rule below is genuinely app-specific in practice, the app's own `CLAUDE.md` overrides it.**
+**When a rule below is genuinely app-specific in practice, the app's own `AGENTS.md` (or `CLAUDE.md`) overrides it.**
 Otherwise, treat these as binding defaults.
 
 ---
@@ -104,7 +104,7 @@ everything, driven by `@media` queries — not separate layouts.
   variant for tests and non-React code. `src/i18n/index.ts` also exports `LANGUAGES` (the picker
   list) and a default static `t`.
 - **Always use `useStrings()` in components** — the static `t` won't react to a language change.
-- **Keep the language table in the app's `CLAUDE.md` and `README.md` in sync** whenever you add or
+- **Keep the language table in the app's `AGENTS.md` (or `CLAUDE.md`) and `README.md` in sync** whenever you add or
   remove a language (one entry in `translations.ts`, one in `LANGUAGES`, update both tables).
 - **Declare `CFBundleLocalizations` en `app.json → ios.infoPlist`** con todos los códigos de idioma
   soportados. El App Store lee los idiomas del bundle nativo (carpetas `.lproj`), no del código JS.

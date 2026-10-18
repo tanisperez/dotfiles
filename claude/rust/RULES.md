@@ -28,7 +28,7 @@ No code before the design.
 3. **The result is a design system document**, `docs/design-system.md`, written from the mockups:
    tokens with their hex values, which telaio tokens the app overrides, type scale, metrics of
    the app's own layout, screens, motion and the rules for using them. Its tokens become the
-   app's `telaio::Tokens` (or the defaults) plus a small domain palette in `theme/palette.rs`.
+   app's `telaio_ui::Tokens` (or the defaults) plus a small domain palette in `theme/palette.rs`.
 4. **Keep the mockups in the repository only while they are being implemented.** Once the UI
    is built, the code is the source of truth and `docs/design-system.md` its readable summary.
    Remove the mockups and keep them in git history under the tag `design-mockups` (as in Vano).
@@ -42,13 +42,15 @@ No code before the design.
 - **UI: `gpui-kit`**, at the exact version telaio pins (0.7.0 today), which bundles
   `gpui-component` and `gpui-base` and pins `gpui-pre`. `cargo tree -d --depth 0 | grep gpui` must
   print nothing. Upgrading gpui-kit is a telaio release first, then every app.
-- **Design system: `telaio`** as a git dependency pinned to a tag (section 6).
+- **telaio** (section 6): `telaio-ui` (design system and components), `telaio-app` (application
+  shell) and `telaio-update` (in-app updater), git dependencies pinned to one tag.
 - **HTTP: `ureq` 3** (blocking, rustls) on gpui's background executor. **No async runtime**, no
   `tokio`.
-- **Translations: `rust-i18n` 4** (gpui-component already ships it) and `sys-locale`.
+- **Translations: `rust-i18n` 4** (gpui-component already ships it); language detection comes
+  from `telaio-app`.
 - **Errors:** `thiserror` in library crates, `anyhow` only in the app crate.
 - **Settings:** TOML (`toml`, `serde`), paths from `dirs`.
-- **Logging:** the `log` facade and a small own logger (section 11).
+- **Logging:** the `log` facade and `telaio_app::logging` (section 11).
 - `gpui-kit` source is in `~/.cargo/registry/src/*/gpui-kit-<version>`: read it instead of
   relying on memory of the gpui API, which changes quickly.
 
@@ -67,13 +69,12 @@ A Cargo workspace of small crates with a thin UI crate:
 ├── crates/
 │   ├── <app>-core/         domain model, no IO
 │   ├── <app>-.../          one crate per concern (format, IO, engine, ...), no gpui
-│   ├── <app>-update/       in-app updater, standalone (section 15)
+│   ├── <app>-cli/          the app's own command line commands, no gpui (section 12)
 │   └── <app>-app/          the gpui binary: only UI and glue
 │       ├── assets/         icons, bundled data (fonts come from telaio)
 │       ├── locales/        rust-i18n YAML, one file per area
 │       └── src/
-│           ├── main.rs     startup, CLI, window
-│           ├── logging.rs
+│           ├── main.rs     startup (telaio_app pieces), window
 │           ├── state/      UI logic in plain Rust, unit tested without a window
 │           ├── theme/      domain colors and app-only metrics on top of telaio
 │           └── views/      gpui views; views/components/ for the domain widgets
@@ -112,7 +113,9 @@ authors = ["Estanislao Pérez Nartallo <tanisperez@gmail.com>"]
 
 [workspace.dependencies]
 gpui-kit = "0.7.0"
-telaio = { git = "https://github.com/tanisperez/telaio", tag = "vX.Y.Z" }
+telaio-ui = { git = "https://github.com/tanisperez/telaio", tag = "vX.Y.Z" }
+telaio-app = { git = "https://github.com/tanisperez/telaio", tag = "vX.Y.Z" }
+telaio-update = { git = "https://github.com/tanisperez/telaio", tag = "vX.Y.Z" }
 # every other dependency here once; crates use `dep = { workspace = true }`
 
 [workspace.lints.clippy]
@@ -121,7 +124,7 @@ unwrap_used = "warn"
 expect_used = "warn"
 
 [workspace.lints.rust]
-unsafe_code = "forbid"     # "deny" only when one function truly needs an #[allow], with a SAFETY comment
+unsafe_code = "forbid"     # the one unsafe call apps needed (AttachConsole) lives in telaio-app
 
 [profile.release]
 lto = "fat"                # 8% smaller binary than thin, same speed (Postino #34)
@@ -161,32 +164,44 @@ subdirectory of `target/`, never in `/tmp` (a RAM tmpfs): a full gpui build take
 
 ## 6. telaio
 
-`telaio` (`~/dev/telaio`, <https://github.com/tanisperez/telaio>) holds the palette tokens, the
-gpui-kit theme builder, shared metrics, the Geist fonts and the standard components. Its
-`AGENTS.md` has the rules for changing it.
+telaio (`~/dev/telaio`, <https://github.com/tanisperez/telaio>) is the kit every app is built on,
+one repository with three crates released together (its README has the API and examples, its
+`AGENTS.md` the rules for changing it):
 
-- **Startup:** `gpui_kit::application().with_assets(gpui_kit::assets::AllAssets)` (without
-  `AllAssets` every icon renders empty), `gpui_kit::init(cx)`, then
-  `telaio::install(cx, &ThemeFamily::new("<App>").tokens(light, dark).fonts(...))`, and
-  `ThemeChoice::apply` on the window. After a settings change, `telaio::apply` and
-  `ThemeChoice::apply` again. On Linux open the window with `WindowDecorations::Client` and wrap
-  the view in gpui-kit's `Root`, which also renders the dialog, sheet and notification layers
-  (never render them again in the view).
+- `telaio-ui`: palette tokens, the gpui-kit theme builder, shared metrics, the Geist fonts and
+  the standard components.
+- `telaio-app`: the application shell. One `AppIdentity` const (name, slug, app id, version,
+  env prefix, repository) configures logging, the command line pieces, language detection,
+  number formatting, the config folder, the window bootstrap and the About header.
+- `telaio-update`: the in-app updater, configured by one `UpdaterConfig` const (section 15).
+
+- **Startup:** `telaio_app::window::application()` (gpui-kit with `AllAssets`; without it every
+  icon renders empty), `telaio_app::window::init(cx, &IDENTITY)`, then
+  `telaio_ui::install(cx, &ThemeFamily::new("<App>").tokens(light, dark).fonts(...))`. Open the
+  window with `telaio_app::window::options(cx, &IDENTITY, sizes)` (client decorations on Linux,
+  the app id), apply the `ThemeChoice`, call `telaio_app::window::follow_system_appearance`, and
+  wrap the view in gpui-kit's `Root`, which also renders the dialog, sheet and notification
+  layers (never render them again in the view). After a settings change, `telaio_ui::apply` and
+  `ThemeChoice::apply` again.
 - **Colors only from `cx.palette()`**, never `cx.theme()` and never a literal. Sizes only from
-  `telaio::metrics` and the app's `theme::metrics` (which re-exports telaio's with
-  `pub use telaio::metrics::*`).
-- **Domain colors** live in the app as an extension trait on `telaio::Palette` (Postino's
+  `telaio_ui::metrics` and the app's `theme::metrics` (which re-exports telaio's with
+  `pub use telaio_ui::metrics::*`).
+- **Domain colors** live in the app as an extension trait on `telaio_ui::Palette` (Postino's
   `theme::PostinoColors`), reading `palette.dark` to pick the mode.
 - **Standard components come from telaio**, re-exported from `views/components/mod.rs`. Only
   domain widgets live in the app. Never fork a telaio component locally: fix or extend it in
   telaio.
-- **Strings of telaio components** come from telaio's own locale and follow the app's
+- **Strings of telaio's crates** come from their own locales and follow the app's
   `rust_i18n::set_locale`.
+- **Shared code goes to telaio, never to a copy.** If two apps would need the same code (a
+  component, a token, shell or updater logic), it belongs in telaio.
 - **Changing telaio and an app together:** a `[patch."https://github.com/tanisperez/telaio"]`
-  entry pointing at `../telaio/crates/telaio` in the app's root `Cargo.toml`. **Never commit it.**
-  Then release telaio (version bump, CI green, tag, GitHub release) and bump the tag in the app.
-- **About screen** shows the telaio version (`telaio::VERSION`) with a link to
-  `telaio::REPOSITORY`, as in Postino's `views/settings/about.rs`.
+  entry pointing each telaio crate at `../telaio/crates/<crate>` in the app's root `Cargo.toml`.
+  **Never commit it.** Then release telaio (milestone closed, version bump, CI green, tag, GitHub
+  release) and bump the tag in the app.
+- **About screen** starts with `telaio_app::about::header` (logo, name, version, platform, the
+  telaio version with its link, release notes and GitHub buttons), as in Postino's
+  `views/settings/about.rs`.
 
 ## 7. Code conventions
 
@@ -219,8 +234,9 @@ gpui-kit theme builder, shared metrics, the Geist fonts and the standard compone
 
 - Languages: **English (source and fallback), Spanish, Galician, Italian.**
 - `rust_i18n::i18n!("locales", fallback = "en")` in `main.rs`; strings with `t!("area.key")`.
-  The OS language from `sys-locale`, mapped in `state/locale.rs`, overridable by a `language`
-  setting (`auto` by default).
+  `telaio_app::language` (`Language`, `LanguageChoice`, `resolve`, `apply`) detects the OS
+  language, overridable by a `language` setting (`auto` by default). The app's `state/locale.rs`
+  keeps only its `plural` helper and the tests of its own locale files.
 - `locales/*.yml`, `_version: 2`, one entry per key with `en`, `es`, `gl` and `it` together, one
   file per area (`common`, `settings`, ...) so parallel work never edits the same file. Keys
   dotted, area first, lowercase snake case. Shared strings under `common.`. Plurals are two keys,
@@ -228,7 +244,8 @@ gpui-kit theme builder, shared metrics, the Geist fonts and the standard compone
 - Strings cached outside `render` (input placeholders) are re-applied when the language changes.
 - **Not translated:** log messages, library errors (shown verbatim in a translated frame),
   protocol literals, keyboard shortcut labels, debug hooks and the `--help`/`--version` output.
-- Numbers shown to the user go through `state::number` (ICU, CLDR data); never in logs or inputs.
+- Numbers shown to the user go through `telaio_app::number` (ICU, CLDR data); never in logs or
+  inputs.
 - **Tests** (in `state/locale.rs`): every key in the four languages with the same `%{}`
   placeholders, no em dash, every literal `t!` key used under `src/` exists. Tests never call
   `rust_i18n::set_locale` (process wide); use `t!("key", locale = "es")`.
@@ -236,8 +253,9 @@ gpui-kit theme builder, shared metrics, the Geist fonts and the standard compone
 
 ## 10. Settings and files
 
-- `settings.toml` in the OS config folder (`dirs::config_dir()/<app>/`), applied live, no Save
-  button. Unknown or invalid values fall back to the default.
+- `settings.toml` in the OS config folder (`telaio_app::paths::config_dir(&IDENTITY)`), applied
+  live, no Save button. Unknown or invalid values fall back to the default. The settings struct
+  is the app's own (`telaio_app::logging::LogLevel` is a ready-made field).
 - Every file the app writes is listed in `docs/architecture.md` ("Files <App> writes").
 - The settings window has an **About** pane: version, platform, telaio version, links to the
   release notes and GitHub, the updater state (section 15) and a privacy line saying what the app
@@ -245,15 +263,15 @@ gpui-kit theme builder, shared metrics, the Geist fonts and the standard compone
 
 ## 11. Logging
 
-As in Postino's `crates/postino-app/src/logging.rs`: a small logger behind the `log` facade, so
-gpui, wgpu and HTTP messages reach it too.
+`telaio_app::logging`: a small logger behind the `log` facade, so gpui, wgpu and HTTP messages
+reach it too. `init(&IDENTITY, level)` at the very start of `main`, after reading the settings.
 
 - File: `$XDG_STATE_HOME/<app>/<app>.log` (`~/.local/state/...`) on Linux,
   `~/Library/Logs/<App>/` on macOS, `%LOCALAPPDATA%\<App>\logs\` on Windows. Rotated at 5 MB,
   10 files at most.
 - Level from the `log_level` setting (Info by default), overridden by `<APP>_LOG` at startup.
-  Crates other than the app's and `gpui*` are capped at Warn (Info at Trace): `naga` alone
-  writes about 20 MB at Debug on every startup.
+  Crates other than the app's, `gpui*` and `telaio*` are capped at Warn (Info at Trace): `naga`
+  alone writes about 20 MB at Debug on every startup.
 - Info for startup and user actions, Warn for failed operations, Debug for internals, Trace for
   per-frame or per-item detail (one line per render of the root view at Trace, so a render
   count that grows while idle shows up).
@@ -261,16 +279,22 @@ gpui, wgpu and HTTP messages reach it too.
 
 ## 12. Command line and debug hooks
 
-- `-h`/`--help` and `-V`/`--version` print and exit **without opening a window** (Postino #136,
-  `state/cli.rs`): `<App> X.Y.Z` for the version, a short usage with a link to the command line
-  docs for help. English only. On Windows the binary is a GUI subsystem app, so it calls
-  `AttachConsole(ATTACH_PARENT_PROCESS)` (the one allowed `unsafe` block) to reach the terminal.
+- The command line is the app's own **`<app>-cli` crate** (no gpui), as Postino's `postino-cli`:
+  `main` calls `<app>_cli::run_if_cli(first_arg)` first and opens the window only when it returns
+  `None`. Commands print and exit **without opening a window**, in the same binary. Adding a
+  command is a module (parse, run, help text, tests) registered in one place; move to `clap`
+  with the first real subcommand.
+- Every app has `-h`/`--help` and `-V`/`--version`. The shared pieces come from
+  `telaio_app::cli`: the `<App> X.Y.Z` line, the help header and footer with a link to the
+  command line docs, the exit codes, and on Windows (a GUI subsystem binary) the console attach.
+  English only.
 - A path argument opens it (file association, section 16). macOS delivers "open with" through
   Apple Events: hook `cx.on_open_urls` too.
 - **Debug hooks**, read once at startup and ignored when unset or invalid: `<APP>_OPEN=<state>`
   starts in a given screen (`settings`, `settings-about`, `components`, ...), `<APP>_LOG=<level>`.
   `<APP>_OPEN=components` shows the app's components gallery, domain widgets included; the
-  standard components alone, under every sample palette, are in `telaio-gallery`. Document hooks in `AGENTS.md`, not in the user docs.
+  standard components alone, under every sample palette, are in `telaio-gallery`. Document hooks
+  in `AGENTS.md`, not in the user docs.
 
 ## 13. Documentation
 
@@ -327,8 +351,9 @@ Targets: Linux x86_64 (built on Ubuntu 22.04 for glibc 2.35), Windows x86_64, ma
 - **macOS and Windows:** direct downloads (Homebrew tap and winget later), updates in-app.
 - **Desktop integration:** `.desktop` file and MIME XML on Linux, `Info.plist` document types on
   macOS, `HKCU` file association on Windows. Icons from one SVG master in `packaging/icons/`.
-- **Updater** (`<app>-update` crate, standalone, tested against a local `tiny_http` server; glue
-  in `state/update.rs` and `views/update.rs`):
+- **Updater** (`telaio-update`, tested against a local `tiny_http` server; the app keeps a
+  `const UPDATER: UpdaterConfig`, the gate and its restart confirmation in `state/update.rs`,
+  and the UI in `views/update.rs`):
   - compiled in only with `<APP>_UPDATER=github` at build time (`option_env!`), set on the macOS
     app and the Windows builds; otherwise the feature and its setting do not exist;
   - one check 10 s after startup, no timer, no polling; a manual "Check for updates" command;
@@ -374,9 +399,10 @@ As in Postino's `.github/workflows/`:
 1. Design it in Claude Design on top of telaio (section 1) and write `docs/design-system.md`.
 2. Pick the name, check it on crates.io and GitHub, create `tanisperez/<app>`, decide the app id
    and the website subdomain.
-3. Copy the skeleton from Postino: configuration files (section 4), `Makefile`, `LICENSE`,
-   `NOTICE`, workflows, `packaging/`, `site/`, `logging.rs`, `state/cli.rs`, `state/locale.rs`,
-   `state/number.rs`, `state/settings.rs`, the About pane and the updater crate. Rename every
-   `postino`, `Postino`, `POSTINO_` and `codes.tanis.postino`.
+3. Depend on `telaio-ui`, `telaio-app` and `telaio-update`, and define the app's
+   `AppIdentity` and `UpdaterConfig`. Copy from Postino what a crate cannot carry: configuration
+   files (section 4), `Makefile`, `LICENSE`, `NOTICE`, workflows, `packaging/`, `site/`, the
+   `<app>-cli` crate, `state/settings.rs`, `state/update.rs`, `views/update.rs` and the About
+   pane. Rename every `postino`, `Postino`, `POSTINO_` and `codes.tanis.postino`.
 4. Write `AGENTS.md` importing this file, and the README in the order of section 13.
 5. Create the first milestone and its issues before writing features.

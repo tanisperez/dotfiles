@@ -72,3 +72,15 @@ Proyectos actuales:
 Tienes permiso de lectura total sobre los dos sin pedir permiso, aunque no sean el directorio de trabajo activo.
 
 Se irán creando nuevos proyectos de este tipo en el futuro. La base de código de los proyectos existentes sirve como punto de partida (boilerplate) para arrancarlos rápido, así que cuando el usuario inicie uno nuevo, considera reutilizar patrones, configuración y estructura ya validados en `seqix`.
+
+## Apps de escritorio (Rust + telaio)
+
+Aplicaciones nativas de escritorio para Linux, Windows y macOS, en Rust con `gpui-kit` y `telaio`, el crate con el sistema de diseño y los componentes compartidos. Son independientes de las apps Expo: no mezcles sus convenciones.
+
+Proyectos actuales:
+- `~/dev/postino`: cliente HTTP, la implementación de referencia.
+- `~/dev/vano`: analizador de disco.
+- `~/dev/nastro`: reproductor de música con skins.
+- `~/dev/telaio`: el crate compartido y su galería de componentes.
+
+Las reglas comunes están en `~/.claude/rust/RULES.md`, y el `AGENTS.md` de cada app las importa. Antes de escribir código de una app nueva, se diseña en Claude Design partiendo del sistema de diseño de telaio, y se arranca copiando el esqueleto de Postino (ver la sección 18 de esas reglas).

@@ -130,6 +130,9 @@ unsafe_code = "forbid"     # the one unsafe call apps needed (AttachConsole) liv
 lto = "fat"                # 8% smaller binary than thin, same speed (Postino #34)
 codegen-units = 1
 strip = true               # panics stay as unwind
+
+[profile.dev.package."*"]
+opt-level = 2              # unoptimized gpui blocked the UI 37 s of 45 in a Postino load test
 ```
 
 - `rustfmt.toml`: `edition = "2024"`, `max_width = 100`.
@@ -227,6 +230,10 @@ one repository with three crates released together (its README has the API and e
   cheap key (an id plus a generation counter) and share big texts as `Arc<str>` or
   `SharedString`.
 - Resync an editor (`set_value`) only when that key changes.
+- **Debug builds optimize their dependencies** (`[profile.dev.package."*"] opt-level = 2`,
+  section 4): unoptimized gpui is too slow to judge the UI by, while the app's own crates stay
+  quick to rebuild. Measure UI stalls on that profile or on release, for example with a 10 ms
+  timer on the foreground executor that logs when it fires more than 50 ms late.
 - Test with big data, not only small samples, and measure RSS. After upgrading gpui-kit, re-check
   the idle rule.
 

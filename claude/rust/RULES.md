@@ -330,14 +330,24 @@ reach it too. `init(&IDENTITY, level)` at the very start of `main`, after readin
   `env!("CARGO_PKG_VERSION")`. Tags are `vX.Y.Z`; the release workflow fails if they differ.
   Pre-releases (`vX.Y.Z-rc.N`) are built and published as GitHub pre-releases, never distributed
   and invisible to the updater; set the full pre-release version in `Cargo.toml` before tagging.
+- **Development versions:** between two releases the version is the next one with `-dev`
+  (`0.4.0-dev`), so a development build is recognizable at a glance. It sorts below the release
+  (`0.4.0-dev < 0.4.0`), so the updater keeps working. A `build.rs` in the CLI crate captures the
+  short commit (`git rev-parse --short HEAD`, or `<APP>_COMMIT` when set at build time, nothing
+  without a repository) and a `-dev` build shows it next to the version in About, `--version`
+  and the startup log line (`Postino 0.4.0-dev (4e74e2d)`). Releases and release candidates show
+  the bare version, and the updater and the release notes link always use the bare version. See
+  Postino's `postino-cli` (`version_label`, `display_identity`).
 - **Work is tracked with GitHub milestones and issues** (`gh issue list --milestone X.Y.Z`), not
   in a separate document. Complex work goes on a branch.
 - **Release steps** (Postino's `docs/releasing.md`): every milestone issue closed and the checks
-  green on `main`; bump the version and commit; tag and push (ask before pushing); create the
+  green on `main`; set the release version (drop `-dev`) and commit; tag and push (ask before
+  pushing); create the
   release as a **draft** with English Markdown notes (`gh release create vX.Y.Z --draft
   --verify-tag --notes-file notes.md`); the `Release` workflow uploads the assets and publishes
   the draft only when everything is there; for a stable release, run the `Website` workflow by
-  hand to rebuild the package repositories.
+  hand to rebuild the package repositories; finally bump the version to the next `X.Y.Z-dev` and
+  commit, so the builds of the next milestone are marked from the start.
 
 ## 15. Packaging, distribution and the in-app updater
 

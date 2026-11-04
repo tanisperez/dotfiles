@@ -1,7 +1,8 @@
 # Rust desktop apps (gpui-kit + telaio): shared working rules
 
 Single source of truth for how we build **every** native desktop app in this workspace: Postino
-(`~/dev/postino`), Vano (`~/dev/vano`), Nastro (`~/dev/nastro`) and every future one. Each app's
+(`~/dev/postino`), Vano (`~/dev/vano`), Nastro (`~/dev/nastro`), ted (`~/dev/ted`, a text editor)
+and every future one. Each app's
 `AGENTS.md` imports this file with `@~/.claude/rust/RULES.md`, so it only needs to describe what is
 unique to that app (its domain, its crates, its decisions).
 
@@ -168,7 +169,8 @@ subdirectory of `target/`, never in `/tmp` (a RAM tmpfs): a full gpui build take
 ## 6. telaio
 
 telaio (`~/dev/telaio`, <https://github.com/tanisperez/telaio>) is the kit every app is built on,
-one repository with three crates released together (its README has the API and examples, its
+one repository with four library crates and a gallery, released together with one version and
+one tag (its README has the API and examples, its
 `AGENTS.md` the rules for changing it):
 
 - `telaio-ui`: palette tokens, the gpui-kit theme builder, shared metrics, the Geist fonts and
@@ -177,6 +179,11 @@ one repository with three crates released together (its README has the API and e
   env prefix, repository) configures logging, the command line pieces, language detection,
   number formatting, the config folder, the window bootstrap and the About header.
 - `telaio-update`: the in-app updater, configured by one `UpdaterConfig` const (section 15).
+- `telaio-git`: the git client (it drives the `git` executable, no gpui), extracted from
+  Postino and shared with ted: detection (including the git of WSL from Windows through
+  `detect_for`), status, staging, diffs, commit, sync, branches, stash, log and the commit graph.
+  App rules (Postino's secret files, the automatic stash prefix) stay in the app.
+- `telaio-gallery`: the components gallery binary (`make gallery`), not a dependency.
 
 - **Startup:** `telaio_app::window::application()` (gpui-kit with `AllAssets`; without it every
   icon renders empty), `telaio_app::window::init(cx, &IDENTITY)`, then

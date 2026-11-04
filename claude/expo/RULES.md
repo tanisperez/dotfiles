@@ -76,6 +76,12 @@ everything, driven by `@media` queries — not separate layouts.
 
 - Every screen must respect device safe areas via **`react-native-safe-area-context`**. This is
   essential for consistent margins across all views.
+- **Left and right insets count too**, not just top and bottom. A portrait-locked phone app never
+  saw them, but since iOS 27 every app is resizable and the iPhone Duo's inner display ignores the
+  portrait lock, so landscape (and the camera cutout's side inset) reaches every app. Add
+  `insets.left`/`insets.right` on each screen's root; where the root's background would show as a
+  strip beside full-bleed content (a dark document viewer), put them on the content area in that
+  content's own colour instead (Foliato's `viewer.tsx`).
 - Read `useSafeAreaInsets()` and add the relevant inset to padding, gated behind
   `Platform.OS !== 'web'` (insets are zero on web, where CSS handles spacing). `expo-router/entry`
   already wraps the app in a `SafeAreaProvider`.
@@ -405,3 +411,60 @@ internals are a separate axis of failure from the SDK.
 8. **A device pass is still mandatory.** Steps 1–7 prove it compiles, type-checks and renders on
    web. They prove nothing about native: the new architecture, the Reanimated/worklets bump and any
    WebView-hosted content are all invisible to them.
+
+## 17. Migrating SDK 57 → 58 (done on Foliato, 2026-10-30)
+
+Same procedure as §16, and it held: baseline tag, `npx expo install expo@^58.0.0 --fix`, then
+`rm -rf node_modules package-lock.json && npm install`. The first `--fix` died on an ERESOLVE
+against the old tree (`@expo/ui` peer of expo-router 58); the clean install is what resolves it.
+`--fix` also writes `"expo": "^58.0.0"`: put it back to a tilde on the installed patch.
+
+Versions it landed on: RN 0.88.1, React 19.3.0, expo-router ~58.0.28, reanimated 4.7.1, worklets
+0.13.0, gesture-handler ~3.3.0 (a major), react-native-webview 14.0.1 (a major), jest 30,
+eslint-config-expo ~58.0.4. TypeScript unchanged. Node must be 22.13+, 24.3+ or 26+.
+
+### What actually broke
+
+1. **The web page stopped hydrating, silently.** Expo Router 58 hands `+html.tsx` the bundle
+   `<script>` tags, the CSS and react-native-web's stylesheet through `useServerDocumentContext()`
+   (`headNodes`, `bodyNodes`, `htmlAttributes`, `bodyAttributes`). A custom `+html.tsx` that only
+   renders `<body>{children}</body>` serves a perfectly prerendered page with no script: it looks
+   right, no button works, and no console says why. Every app here has a custom `+html.tsx`.
+2. **`unstable_enablePackageExports = false` no longer builds.** SDK 58 packages publish subpaths
+   only through "exports" (`@expo/log-box/LogBox`, `expo/dom/global`). Turn exports back on and
+   fix whatever the global switch was protecting at the specific request instead (for pdf-lib:
+   resolve `tslib` to its CJS build only when the origin is a pdf-lib package).
+3. **`InteractionManager` is removed** from `react-native`. `requestIdleCallback` /
+   `cancelIdleCallback` are the replacement and are typed globals.
+4. **`File.write()` is async.** `writeSync()` is the drop-in for the old behavior.
+5. **react-native-webview 14.0.1's typings make every prop `never`**: the class is declared
+   `WebView<P = undefined>` and `WebViewProps & undefined` is `never` (13.x had `P = {}`). Pass the
+   argument explicitly, `useRef<WebView<object>>` and `<WebView<object> ...>`.
+6. **A package with an `import`/`require` exports map can land in the bundle TWICE** once exports
+   are on: `import 'pkg'` resolves to its ES build, while a deep `pkg/cjs/...` path (or a `require`)
+   stays in CJS. Two copies of the same classes, and `instanceof` between them fails. Foliato hit it
+   with `@cantoo/pdf-lib` (signing a protected PDF failed on the phone only, jest maps everything to
+   CJS). Pin such a package to one build in `resolveRequest`, and check the bundle Expo Go loads
+   (`curl` its manifest's `launchAsset.url`, `grep` the module paths) rather than trusting jest.
+7. **Playwright's Chromium again** (§16's trap): the clean install bumped it, run
+   `npx playwright install chromium`.
+
+### Traps for verifying it
+
+- **Web routes are async by default now**, so a module a tool screen imports no longer loads at
+  the root. "The home screen renders" proves nothing about a library only a tool uses: open that
+  screen and use it.
+- **Never `pkill -f` the dev server by a pattern that also appears in your own command line**
+  (`pkill -f "expo start --web --port 8084"` inside a command that later runs `expo start ...
+  --port 8084` kills the shell running it). Use `fuser -k <port>/tcp`.
+
+### What did NOT break
+
+- Jest 30: same suite and test counts, nothing to change.
+- `react-native-sortables`' jest mock (§16 breakage 4) was kept, not re-tested.
+- The new `SceneDelegate`: prebuild generates one subclassing `ExpoAppSceneDelegate`, which
+  forwards cold-start `connectionOptions.urlContexts` and warm `openURLContexts`, so "Open with"
+  is structurally fine. Only TestFlight proves it.
+- Android: R8 was already on for Foliato; local config plugins applied unchanged.
+- `npm audit`: nothing actionable, only build tooling (`zod` inside `@expo/cli`, `deepmerge`),
+  and npm's "fix" is a downgrade to SDK 51.

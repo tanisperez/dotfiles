@@ -423,3 +423,30 @@ As in Postino's `.github/workflows/`:
    pane. Rename every `postino`, `Postino`, `POSTINO_` and `codes.tanis.postino`.
 4. Write `AGENTS.md` importing this file, and the README in the order of section 13.
 5. Create the first milestone and its issues before writing features.
+
+## 19. Scrolling and interaction states (every app and telaio)
+
+Gaps found in Postino, Vano and ted (2026-11-04). Both rules apply to every view and every telaio
+component, old code included.
+
+- **Nothing is ever cut off.** In gpui a box whose content outgrows it just clips, with no
+  scrollbar and no way to reach the rest. Every region whose content can outgrow it scrolls:
+  vertically for lists, trees, panels, side bars, dialogs, settings panes and sheets;
+  horizontally too for content that does not wrap (code, raw text, logs, wide tables, long
+  paths). Use `overflow_y_scroll`/`overflow_x_scroll` with a tracked `ScrollHandle` and a visible
+  `Scrollbar`, or a `uniform_list` for long lists. Check by shrinking the window to its minimum
+  size, with big data and with the largest font size: every row, field and button must stay
+  reachable.
+- **Every clickable control shows hover and active.** Buttons, icon buttons, rows, tree nodes,
+  tabs, chips, badges that act, links and menu items get a hover state and a pressed state
+  (`:active`), and `cursor_pointer()`. In a hand-rolled clickable `div`, `.hover(|s|
+  s.bg(palette.hover))` and `.active(|s| s.bg(palette.pressed))`; a selected row keeps its
+  selected color under hover. Colors only from the palette (section 6). Telaio's standard
+  components already do this: prefer them to a hand-rolled `div`.
+- **Report and fix what you find.** When reading or changing UI code and a missing scroll, hover
+  or active state turns up, even outside the task at hand, tell the user, open an issue in the
+  current milestone, and fix it in its own commit (in telaio when it is a telaio component), not
+  silently mixed into the task's diff.
+- **Check it in the app** (section 17): hover each control you touched and hold the mouse button
+  down on it (`xdotool mousedown`, screenshot, `mouseup`) to see both states; shrink the window
+  to see the scrollbars.

@@ -18,7 +18,7 @@
       "Read(~/dev/chess-counter/*)"
     ]
   },
-  "model": "sonnet",
+  "model": "opus",
   "availableModels": [
     "claude-opus",
     "claude-opus-4-8",
@@ -35,6 +35,12 @@
   "modelSettings": {
     "claude-opus-5": {
       "effortLevel": "xhigh"
+    },
+    "claude-opus-5-5": {
+      "effortLevel": "medium"
+    },
+    "claude-sonnet-5-5": {
+      "effortLevel": "medium"
     }
   },
   "theme": "dark",

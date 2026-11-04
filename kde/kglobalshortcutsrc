@@ -9,18 +9,14 @@ Switch to Last-Used Keyboard Layout=Meta+Alt+L,Meta+Alt+L,Cambiar a la última d
 Switch to Next Keyboard Layout=Meta+Alt+K,Meta+Alt+K,Cambiar a la siguiente distribución de teclado
 _k_friendly_name=Selector de distribución del teclado
 
-[kaccess]
-Toggle Screen Reader On and Off=Meta+Alt+S,Meta+Alt+S,Activar o desactivar el lector de pantalla
-_k_friendly_name=Accesibilidad
-
 [kmix]
 _k_friendly_name=Volumen del sonido
 decrease_microphone_volume=Microphone Volume Down,Microphone Volume Down,Bajar el volumen del micrófono
 decrease_volume=Volume Down,Volume Down,Bajar el volumen
-decrease_volume_small=Shift+Volume Down,Shift+Volume Down,Bajar el volumen un 1 %
+decrease_volume_small=Shift+Volume Down,Shift+Volume Down,Bajar el volumen un 1 %
 increase_microphone_volume=Microphone Volume Up,Microphone Volume Up,Subir el volumen del micrófono
 increase_volume=Volume Up,Volume Up,Subir el volumen
-increase_volume_small=Shift+Volume Up,Shift+Volume Up,Subir el volumen un 1 %
+increase_volume_small=Shift+Volume Up,Shift+Volume Up,Subir el volumen un 1 %
 mic_mute=Microphone Mute\tMeta+Volume Mute,Microphone Mute\tMeta+Volume Mute,Silenciar el micrófono
 mute=Volume Mute,Volume Mute,Silenciar
 push_to_talk=none,none,Pulse para hablar
@@ -52,8 +48,8 @@ Increase Opacity=none,none,Incrementar opacidad de la ventana activa en un 5 %
 Kill Window=Meta+Ctrl+Esc,Meta+Ctrl+Esc,Matar la ventana
 Move Tablet to Next LogicalOutput=none,none,Mover la tableta a la siguiente salida
 Move Tablet to Next Output=none,none,Mover la tableta a la siguiente salida
-MoveMouseToCenter=Meta+F6,Meta+F6,Mover ratón al centro
-MoveMouseToFocus=Meta+F5,Meta+F5,Mover ratón hasta el foco
+MoveMouseToCenter=Meta+F6,Meta+F6,Centrar el puntero en la pantalla
+MoveMouseToFocus=Meta+F5,Meta+F5,Centrar el puntero en la ventana que contiene el foco
 MoveZoomDown=none,none,Mover área ampliada hacia abajo
 MoveZoomLeft=none,none,Mover área ampliada a la izquierda
 MoveZoomRight=none,none,Mover área ampliada a la derecha
@@ -111,6 +107,7 @@ Switch to Screen Below=none,none,Cambiar a la pantalla inferior
 Switch to Screen to the Left=none,none,Cambiar a la pantalla de la izquierda
 Switch to Screen to the Right=none,none,Cambiar a la pantalla de la derecha
 Toggle Night Color=none,none,Suspender/reanudar luz nocturna
+Toggle Show Compositing=none,none,Conmutar el efecto «Mostrar composición»
 Toggle Window Raise/Lower=none,none,Conmutar pasar la ventana al frente/atrás
 Walk Through Windows=Alt+Tab,Alt+Tab\tMeta+Tab,Recorrer las ventanas
 Walk Through Windows (Reverse)=Alt+Shift+Tab,Alt+Shift+Tab\tMeta+Shift+Tab,Recorrer las ventanas (hacia atrás)
@@ -209,6 +206,36 @@ view_actual_size=Meta+0,Meta+0,Ampliar al tamaño real
 view_zoom_in=Meta++\tMeta+=,Meta++\tMeta+=,Ampliar
 view_zoom_out=Meta+-,Meta+-,Reducir
 
+[kwin][$InverseAction]
+Cycle Overview=Cycle Overview Opposite
+Increase Opacity=Decrease Opacity
+MoveZoomDown=MoveZoomUp
+MoveZoomLeft=MoveZoomRight
+Switch One Desktop Down=Switch One Desktop Up
+Switch One Desktop to the Right=Switch One Desktop to the Left
+Switch Window Down=Switch Window Up
+Switch Window Left=Switch Window Right
+Switch to Previous Desktop=Switch to Next Desktop
+Switch to Previous Screen=Switch to Next Screen
+Switch to Screen Above=Switch to Screen Below
+Switch to Screen to the Right=Switch to Screen to the Left
+Walk Through Windows=Walk Through Windows (Reverse)
+Walk Through Windows Alternative=Walk Through Windows Alternative (Reverse)
+Walk Through Windows of Current Application=Walk Through Windows of Current Application (Reverse)
+Walk Through Windows of Current Application Alternative=Walk Through Windows of Current Application Alternative (Reverse)
+Window Grow Horizontal=Window Shrink Horizontal
+Window Grow Vertical=Window Shrink Vertical
+Window Lower=Window Raise
+Window One Desktop Down=Window One Desktop Up
+Window One Desktop to the Right=Window One Desktop to the Left
+Window One Screen Down=Window One Screen Up
+Window One Screen to the Right=Window One Screen to the Left
+Window Pack Down=Window Pack Up
+Window Pack Right=Window Pack Left
+Window to Next Screen=Window to Previous Screen
+Window to Previous Desktop=Window to Next Desktop
+view_zoom_in=view_zoom_out
+
 [mediacontrol]
 _k_friendly_name=Controlador multimedia
 mediavolumedown=none,none,Bajar el volumen multimedia
@@ -244,6 +271,8 @@ powerProfile=Battery\tMeta+B,Battery\tMeta+B,Cambiar perfil de energía
 Slideshow Wallpaper Next Image=none,none,Siguiente imagen de fondo del escritorio
 _k_friendly_name=plasmashell
 activate application launcher=Meta\tAlt+F1,Meta\tAlt+F1,Activar el lanzador de aplicaciones
+activate next task manager entry=Meta+Ctrl+PgDown,Meta+Ctrl+PgDown,Activar la entrada siguiente del gestor de tareas
+activate previous task manager entry=Meta+Ctrl+PgUp,Meta+Ctrl+PgUp,Activar la entrada anterior del gestor de tareas
 activate task manager entry 1=Meta+1,Meta+1,Activar la entrada 1 del gestor de tareas
 activate task manager entry 10=none,none,Activar la entrada 10 del gestor de tareas
 activate task manager entry 2=Meta+2,Meta+2,Activar la entrada 2 del gestor de tareas
@@ -256,12 +285,14 @@ activate task manager entry 8=Meta+8,Meta+8,Activar la entrada 8 del gestor de t
 activate task manager entry 9=Meta+9,Meta+9,Activar la entrada 9 del gestor de tareas
 clear history=none,none,Borrar el historial de notificaciones
 clear-history=none,none,Borrar historial del portapapeles
-clipboard_action=Meta+Ctrl+X,Meta+Ctrl+X,Menú emergente de acciones automático
+clipboard_action=none,none,Conmutar la aparición automática del menú de acciones
 cycle-panels=Meta+Alt+P,Meta+Alt+P,Mover el foco del teclado entre paneles
 cycleNextAction=none,none,Siguiente elemento del historial
 cyclePrevAction=none,none,Anterior elemento del historial
 edit_clipboard=none,none,Editar el contenido…
 manage activities=none,Meta+Q,Mostrar el selector de actividad
+move active task to left=Meta+Ctrl+Shift+PgUp,Meta+Ctrl+Shift+PgUp,Mover atrás la entrada activa del gestor de tareas
+move active task to right=Meta+Ctrl+Shift+PgDown,Meta+Ctrl+Shift+PgDown,Mover adelante la entrada activa del gestor de tareas
 next activity=Meta+A,none,Recorrer las actividades
 previous activity=Meta+Shift+A,none,Recorrer las actividades (en orden inverso)
 repeat_action=none,none,Invocar manualmente la acción en el portapapeles actual
@@ -272,11 +303,14 @@ switch to next activity=none,none,Cambiar a la actividad siguiente
 switch to previous activity=none,none,Cambiar a la actividad anterior
 toggle do not disturb=none,none,Conmutar no molestar
 
+[services][net.local.vicinae.desktop]
+_launch=Alt+Space
+
 [services][org.kde.konsole.desktop]
 _launch=none
 
 [services][org.kde.krunner.desktop]
-_launch=Search\tAlt+Space\tAlt+F2\tMeta+Space
+_launch=Search\tAlt+F2\tMeta+Space
 
 [wacomtablet]
 Map to fullscreen=Meta+Ctrl+F,Meta+Ctrl+F,Correspondencia con pantalla completa

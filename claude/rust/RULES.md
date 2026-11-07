@@ -15,13 +15,13 @@ sets of conventions.
 
 ---
 
-## 1. Design first, with Claude Design
+## 1. Design first, in an Artifact
 
 No code before the design.
 
-1. **Design the app in Claude Design** before creating the repository: the main screens in light
+1. **Design the app in an Artifact** before creating the repository: the main screens in light
    and dark, the empty and error states, the settings, the icon, and how it moves.
-2. **Start from telaio's design system**, not from a blank page. Give Claude Design telaio's
+2. **Start from telaio's design system**, not from a blank page. Give the Artifact telaio's
    tokens (`Tokens::DEFAULT_LIGHT`/`DEFAULT_DARK`), its metrics and screenshots of
    `telaio-gallery`, so the app looks like a sibling of the others. Design only what is new: the
    accent (or accents), the domain colors (Postino's HTTP methods, Vano's scan categories), the
@@ -30,9 +30,9 @@ No code before the design.
    tokens with their hex values, which telaio tokens the app overrides, type scale, metrics of
    the app's own layout, screens, motion and the rules for using them. Its tokens become the
    app's `telaio_ui::Tokens` (or the defaults) plus a small domain palette in `theme/palette.rs`.
-4. **Keep the mockups in the repository only while they are being implemented.** Once the UI
-   is built, the code is the source of truth and `docs/design-system.md` its readable summary.
-   Remove the mockups and keep them in git history under the tag `design-mockups` (as in Vano).
+4. **The mockups never enter the repository.** They live in the Artifact, whose link is written
+   in the app's `AGENTS.md`. Once the UI is built, the code is the source of truth and
+   `docs/design-system.md` its readable summary.
 5. A new standard component or token that more than one app could use goes to telaio, not to the
    app (section 6).
 
@@ -420,7 +420,7 @@ As in Postino's `.github/workflows/`:
 
 ## 18. Starting a new app
 
-1. Design it in Claude Design on top of telaio (section 1) and write `docs/design-system.md`.
+1. Design it in an Artifact on top of telaio (section 1) and write `docs/design-system.md`.
 2. Pick the name, check it on crates.io and GitHub, create `tanisperez/<app>`, decide the app id
    and the website subdomain.
 3. Depend on `telaio-ui`, `telaio-app` and `telaio-update`, and define the app's

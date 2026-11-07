@@ -16,6 +16,8 @@ Las tareas de GitHub (issues y pull requests: título, cuerpo, comentarios) se e
 
 Al implementar una issue de GitHub que sea compleja (nueva funcionalidad, varios ficheros, cambios de arquitectura — no un fix trivial de una línea), trabajar siempre en una rama nueva, nunca directamente en `main`.
 
+Los cambios de UI se diseñan primero en un Artifact de claude.ai, antes de tocar el código. El usuario edita el diseño en el Artifact y luego pide los cambios; se lee la página del Artifact que toque, nunca una copia local. El enlace del Artifact de cada proyecto se guarda en su memoria o en su `AGENTS.md`.
+
 **Nunca uses la raya '—' (em dash) en ningún texto que escribas**: ni en respuestas, ni en código,
 comentarios, documentación, commits, issues o pull requests. Es un signo que solo usan las IAs y
 los novelistas, no se usa en escritura normal. Sustitúyelo siempre por una coma o un punto, lo que
@@ -84,4 +86,4 @@ Proyectos actuales:
 - `~/dev/ted`: editor de texto.
 - `~/dev/telaio`: el crate compartido y su galería de componentes.
 
-Las reglas comunes están en `~/.claude/rust/RULES.md`, y el `AGENTS.md` de cada app las importa. Antes de escribir código de una app nueva, se diseña en Claude Design partiendo del sistema de diseño de telaio, y se arranca copiando el esqueleto de Postino (ver la sección 18 de esas reglas).
+Las reglas comunes están en `~/.claude/rust/RULES.md`, y el `AGENTS.md` de cada app las importa. Antes de escribir código de una app nueva, se diseña en un Artifact partiendo del sistema de diseño de telaio, y se arranca copiando el esqueleto de Postino (ver la sección 18 de esas reglas).

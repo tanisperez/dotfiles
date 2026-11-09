@@ -61,7 +61,7 @@ En desarrollo web, el diseño responsivo y los cambios visuales deben hacerse **
 
 ## Repositorio de documentación
 
-La carpeta `~/dev/doc` es el repositorio global de documentación. Cuando el usuario lo pida o cuando lo consideres necesario, crea ahí ficheros Markdown con documentación sobre algún tema o una sesión de trabajo. Tienes permisos de lectura y escritura totales sobre esa carpeta.
+La carpeta `~/dev/doc` es el repositorio global de documentación: proyectos, métricas, decisiones y planes de negocio. Empieza por su `README.md`. Consúltalo cuando tengas dudas sobre los proyectos que tenemos, sin pedir permiso. Para añadir o cambiar algo, pídeme permiso primero, salvo que te lo haya pedido yo.
 
 ## Proyectos de negocio (apps Expo)
 

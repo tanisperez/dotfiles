@@ -20,6 +20,7 @@
   },
   "model": "opus",
   "availableModels": [
+    "claude-fable",
     "claude-opus",
     "claude-opus-4-8",
     "claude-sonnet",
